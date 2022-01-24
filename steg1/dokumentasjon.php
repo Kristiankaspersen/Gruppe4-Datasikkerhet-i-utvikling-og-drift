@@ -7,6 +7,8 @@
     <title>Dokumentasjon Gruppe4</title>
 </head>
 <body>
-    
+
+
+
 </body>
 </html>
