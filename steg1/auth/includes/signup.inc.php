@@ -30,7 +30,7 @@ if(isset($_POST["submitStudent"])) {
 
 } 
 
-if(isset($_POST["sign up Lecturer"])) {
+if(isset($_POST["signUpLecturer"])) {
 
     include "../classes/models/User.php";
     include "../classes/models/Lecturer.php";

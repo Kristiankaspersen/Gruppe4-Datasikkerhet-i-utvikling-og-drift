@@ -69,7 +69,7 @@
                     <option value="OKS12032">Innføring i okse</option>
                 </select>
                 <br>
-                <input type="submit" value="Sign up Lecturer" placeholder="SIGN UP"/> 
+                <button type="submit" name="submitLecturer" value="<?php echo rand(); ?>">Sign up lecturer</button>
             </form>
         </div> 
         <br>

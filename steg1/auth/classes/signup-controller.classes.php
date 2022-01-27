@@ -29,9 +29,14 @@ class SignupController extends Signup {
         if(!$this->checkingSameValidationsForUser()) {
             exit(); 
         }
+        if(!$this->emptyInputLecturer()) {
+            header("location: ../index.php?error=emptyinput"); 
+            return false;
+            exit(); 
+        }
         // Arguemnts: username, firstName, lastName,  email, password, userRole, profilePictureAdress 
         $this->setLecturer($this->user->getUsername(), $this->user->getfirstName(), $this->user->getLastName(), $this->user->getEmail(), 
-        $this->user->getPassword(), $this->user->getRole(), $this->user->getProfilePictureAdress());
+        $this->user->getPassword(), $this->user->getRole(), $this->user->getProfilePictureAdress(), $this->user->getCourseId());
     }
 
     //Checking individual validations for Student: 
@@ -47,6 +52,22 @@ class SignupController extends Signup {
         return $result; 
 
     }
+
+    // Checking indivudual validationds for Lecturer: 
+    private function emptyInputLecturer() { 
+        $result = null; 
+         
+        if(empty($this->user->getCourseId()) || empty($this->user->getProfilePictureAdress())) {
+            $result = false; 
+        }
+        else {
+            $result = true; 
+        }
+        return $result; 
+
+    }
+
+    // Make method that chekcs if the course exists in the db. 
 
     // All validations for the same data for user being checked. 
     private function checkingSameValidationsForUser() {

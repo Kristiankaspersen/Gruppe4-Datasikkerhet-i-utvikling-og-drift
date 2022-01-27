@@ -4,76 +4,76 @@ class Signup extends DatabaseConnection {
 
     protected function setStudent($username, $firstName, $lastName, $email, $password, $userRole, $fieldOfStudy, $startingYear) { 
 
-        $statementUserTable = $this->connect()->prepare('INSERT INTO user (username, first_name, last_name, email, password, user_role ) VALUES (?, ?, ?, ?, ?, ?); ');
-        $statementStudentTable = $this->connect()->prepare('INSERT INTO student (student_id ,field_of_study, starting_year) VALUES (? ,?, ?); ');
-        $statementStudentHasUserTable = $this->connect()->prepare('INSERT INTO student_has_user (student_student_id, user_username) VALUES (?, ?)'); 
+        $insertUserTable = $this->connect()->prepare('INSERT INTO user (username, first_name, last_name, email, password, user_role ) VALUES (?, ?, ?, ?, ?, ?); ');
+        $insertStudentTable = $this->connect()->prepare('INSERT INTO student (student_id ,field_of_study, starting_year) VALUES (? ,?, ?); ');
+        $insertStudentHasUserTable = $this->connect()->prepare('INSERT INTO student_has_user (student_student_id, user_username) VALUES (?, ?)'); 
 
         $studentID = $this->connect()->query('SELECT COUNT(*) FROM student;')->fetchAll(PDO::FETCH_ASSOC);
         
+        // Doing it like this, will not work if students are deleted in DB. 
         $studentID = 1 + $studentID[0]["COUNT(*)"];
          
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT); 
 
-        if(!$statementUserTable->execute(array($username, $firstName, $lastName, $email, $hashedPassword, $userRole))) {
+        if(!$insertUserTable->execute(array($username, $firstName, $lastName, $email, $hashedPassword, $userRole))) {
             
-                $statementUserTable = null; 
+                $insertUserTable = null; 
                 header("location: ../index.php?error=SQLstatementfailed");
                 exit(); 
         }; 
-        if(!$statementStudentTable->execute(array($studentID, $fieldOfStudy, $startingYear))) {
+        if(!$insertStudentTable->execute(array($studentID, $fieldOfStudy, $startingYear))) {
 
-                $statementStudentTable = null; 
+                $insertStudentTable = null; 
                 header("location: ../index.php?error=SQLstatementfailed");
                 exit(); 
         }; 
-        if(!$statementStudentHasUserTable->execute(array($studentID, $username))) {
+        if(!$insertStudentHasUserTable->execute(array($studentID, $username))) {
             
-                $statementStudentHasUserTable = null;
+                $insertStudentHasUserTable = null;
                 header("location: ../index.php?error=SQLstatementfailed");
                 exit(); 
         }; 
 
-        // && $statementStudentTable->execute(array($studentID, $fieldOfStudy, $startingYear))
-        // && $statementStudentHasUserTable->execute(array($studentID, $username))
-
-        $statementUserTable = null; 
-        $statementStudentTable = null; 
-        $statementStudentHasUserTable = null; 
-        
-
+        $insertUserTable = null; 
+        $insertStudentTable = null; 
+        $insertStudentHasUserTable = null; 
+    
     }
 
-    protected function setLecturer($username, $firstName, $lastName, $email, $password, $userRole, $profilePictureAdress) { 
-        $statement = $this->connect()->prepare('INSERT INTO user (username, first_name, last_name, email, password, user_role ) VALUES (?, ?, ?, ?, ?, ?); '); 
-        $statementLecturerTable = $this->connect()->prepare('INSERT INTO lecturer (lecturer_id, profilepicture ) VALUES (? ,?); ');
-        $statementLecturerHasUserTable = $this->connect()->prepare('INSERT INTO lecturer_has_user (lecturer_lecturer_id, user_username) VALUES (?, ?)'); 
+    protected function setLecturer($username, $firstName, $lastName, $email, $password, $userRole, $profilePictureAdress, $courseId) { 
+        $insertUserTable = $this->connect()->prepare('INSERT INTO user (username, first_name, last_name, email, password, user_role ) VALUES (?, ?, ?, ?, ?, ?); '); 
+        $insertLecturerTable = $this->connect()->prepare('INSERT INTO lecturer (lecturer_id, profilepicture, course_course_id) VALUES (? ,?, ?); ');
+        $insertLecturerHasUserTable = $this->connect()->prepare('INSERT INTO lecturer_has_user (lecturer_lecturer_id, user_username) VALUES (?, ?)'); 
 
         $lecturerID = $this->connect()->query('SELECT COUNT(*) FROM lecturer;')->fetchAll(PDO::FETCH_ASSOC);
         
+        // Doing it like this, will not work if lecturerer are deleted in DB.
         $lecturerID = 1 + $lecturerID[0]["COUNT(*)"];
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT); 
 
-        if(!$statement->execute(array($username, $firstName, $lastName, $email, $hashedPassword, $userRole))) {
-            $statement = null; 
+        if(!$insertUserTable->execute(array($username, $firstName, $lastName, $email, $hashedPassword, $userRole))) {
+            $insertUserTable = null; 
             header("location: ../index.php?error=SQLstatementfailed");
             exit(); 
         }; 
 
-        if(!$statementLecturerTable->execute(array($lecturerID, $profilePictureAdress))) {
+        if(!$insertLecturerTable->execute(array($lecturerID, $profilePictureAdress, $courseId))) {
 
-            $statementLecturerTable = null; 
+            $insertLecturerTable = null; 
             header("location: ../index.php?error=SQLstatementfailed");
             exit(); 
         }; 
-        if(!$statementLecturerHasUserTable->execute(array($lecturerID, $username))) {
+        if(!$insertLecturerHasUserTable->execute(array($lecturerID, $username))) {
         
-            $statementLecturerHasUserTable = null;
+            $insertLecturerHasUserTable = null;
             header("location: ../index.php?error=SQLstatementfailed");
             exit(); 
         }; 
 
-        $statement = null; 
+        $insertUserTable = null; 
+        $insertLecturerTable = null;
+        $insertLecturerHasUserTable = null;
 
     }
 
@@ -98,6 +98,5 @@ class Signup extends DatabaseConnection {
 
 
     } 
-
 
 }
