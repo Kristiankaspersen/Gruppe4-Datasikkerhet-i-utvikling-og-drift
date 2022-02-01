@@ -7,6 +7,6 @@
     <title>Steg1-Gruppe4</title>
 </head>
 <body>
-    <?php echo "<h1>Hei</h1>" ?>
+    <?php echo "<h1>Hei</h1><br><a href="steg1">Gå til steg 1</a>" ?>
 </body>
 </html>
