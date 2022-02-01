@@ -12,10 +12,10 @@ $uri = explode( '/', $uri );
 // error_log(json_encode($uri));
 
 
-if ($uri[3] !== 'user') {
-    header("HTTP/1.1 404 Not Found");
-   exit();
-}
+// if ($uri[3] !== 'user') {
+//     header("HTTP/1.1 404 Not Found");
+//    exit();
+// }
 
 $userId = null;
 if (isset($uri[4])) {
