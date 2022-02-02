@@ -18,29 +18,8 @@ $dbName = "GruppeFireDB";
 $mysqli = new mysqli($servername, $username, $password, $dbName); 
 $query = "SELECT course_id, course_name FROM course";
 
-echo "
-<table>
-<tr>
-<td>Kurskode</td>
-<td>Kursnavn</td>
-</tr>
-";
-
-if ($result = $mysqli->query($query)){
-    while(($row = $result->fetch_assoc())){
-        $courseId = $row["course_id"];
-        $courseName = $row["course_name"];
-        
-        echo "
-        <tr>
-        <td><a href='course.php?course=".$courseId."'>" .$courseId. "</a></td>
-            <td>" .$courseName. "</td>
-        </tr>";
-        
-    }    
-    $result->free();    
-}
-    
+echo $_GET['course'];
 ?>
+<h2><a href=""></a></h2>
 </body>
 </html>
