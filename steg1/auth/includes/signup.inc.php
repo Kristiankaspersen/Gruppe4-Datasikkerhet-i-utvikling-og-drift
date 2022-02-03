@@ -18,9 +18,9 @@ if(isset($_POST["submitStudent"])) {
     ); 
   
     // Make signup controller object. 
-    include "../classes/database-connection.classes.php"; 
-    include "../classes/signup.classes.php"; 
-    include "../controller/signup-controller.classes.php"; 
+    include "../../config/DatabaseConnection.php"; 
+    include "../classes/Signup.php"; 
+    include "../controller/SignupController.php"; 
     $signup = new SignupController($student); 
 
     $signup->signupStudent(); 
@@ -51,9 +51,9 @@ if(isset($_POST["submitLecturer"])) {
 
 
     // Make signup controller object. 
-    include "../classes/database-connection.classes.php"; 
-    include "../classes/signup.classes.php"; 
-    include "../controller/signup-controller.classes.php"; 
+    include "../../config/DatabaseConnection.php"; 
+    include "../classes/Signup.php"; 
+    include "../controller/SignupController.php"; 
     $signup = new SignupController($lecturer); 
 
     $signup->signupLecturer($lecturer); 

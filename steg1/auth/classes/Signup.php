@@ -48,6 +48,7 @@ class Signup extends DatabaseConnection {
         $lecturerID = $this->connect()->query('SELECT COUNT(*) FROM lecturer;')->fetchAll(PDO::FETCH_ASSOC);
         
         // Doing it like this, will not work if lecturerer are deleted in DB.
+        // Intead of doing this, you should use auto increment, and then get that id, and insert that in lecturer_has user. 
         $lecturerID = 1 + $lecturerID[0]["COUNT(*)"];
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT); 
