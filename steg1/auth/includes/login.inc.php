@@ -8,7 +8,7 @@ if(isset($_POST["submit"])) {
     // Make signup controller object. 
     include "../classes/database-connection.classes.php"; 
     include "../classes/login.classes.php"; 
-    include "../classes/login-controller.classes.php"; 
+    include "../controller/login-controller.classes.php"; 
     $login = new LoginController($usernameOrEmail, $password); 
 
     $login->loginUser(); 
