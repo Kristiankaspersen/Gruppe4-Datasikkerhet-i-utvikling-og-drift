@@ -45,9 +45,9 @@ class Student extends User {
 
     public function read() {
         // create query 
-        $query = "SELECT *
-                    FROM VWStudents
-                    ORDER BY lecturer_id DESC"; 
+        $query = "SELECT  *
+                    FROM VWstudents
+                    ORDER BY student_id DESC"; 
         // Prepare statment 
         $stmt = $this->conn->prepare($query); 
 
