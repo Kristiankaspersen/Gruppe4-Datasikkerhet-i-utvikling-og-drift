@@ -3,7 +3,7 @@
 class DatabaseConnection { 
 
 
-    protected function connect() { 
+    public function connect() { 
         try { 
 
             // Default password and username MAMP. Change these if you are working on WAMP, XAMPP or LAMP. 
