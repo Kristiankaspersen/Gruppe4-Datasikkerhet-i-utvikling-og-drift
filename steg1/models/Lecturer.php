@@ -39,6 +39,19 @@ class Lecturer extends User {
         
     }
 
+    public function read() {
+        // create query 
+        $query = "SELECT  *
+                    FROM VWlecturer
+                    ORDER BY lecturer_id DESC"; 
+        // Prepare statment 
+        $stmt = $this->conn->prepare($query); 
+
+        $stmt->execute(); 
+        
+        return $stmt; 
+    }
+
 
 
     /**
