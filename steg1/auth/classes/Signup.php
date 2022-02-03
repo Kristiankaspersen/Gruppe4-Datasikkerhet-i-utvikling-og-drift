@@ -11,7 +11,16 @@ class Signup extends DatabaseConnection {
         $studentID = $this->connect()->query('SELECT COUNT(*) FROM student;')->fetchAll(PDO::FETCH_ASSOC);
         
         // Doing it like this, will not work if students are deleted in DB. 
-        $studentID = 1 + $studentID[0]["COUNT(*)"];
+        $studentID = $studentID[0]["COUNT(*)"];
+        
+        // Checks if student_id exists: 
+        $checkIfStudentIdExists = null; 
+        do {
+            $studentID +=1;
+            $checkIfStudentIdExists = $this->connect()->query("SELECT student_id FROM student WHERE student_id = $studentID")->fetchAll(PDO::FETCH_ASSOC);
+            $checkIfStudentIdExists = $checkIfStudentIdExists[0]["student_id"];
+
+        } while($checkIfStudentIdExists != null); 
          
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT); 
 
@@ -49,7 +58,16 @@ class Signup extends DatabaseConnection {
         
         // Doing it like this, will not work if lecturerer are deleted in DB.
         // Intead of doing this, you should use auto increment, and then get that id, and insert that in lecturer_has user. 
-        $lecturerID = 1 + $lecturerID[0]["COUNT(*)"];
+        $lecturerID = $lecturerID[0]["COUNT(*)"];
+
+        // Checks if lecturer_id exists: 
+        $checkIfLecturerIdExists = null; 
+        do {
+            $lecturerID +=1;
+            $checkIfLecturerIdExists = $this->connect()->query("SELECT lecturer_id FROM lecturer WHERE lecturer_id = $lecturerID")->fetchAll(PDO::FETCH_ASSOC);
+            $checkIfLecturerIdExists = $checkIfLecturerIdExists[0]["lecturer_id"];
+
+        } while($checkIfLecturerIdExists != null);
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT); 
 
