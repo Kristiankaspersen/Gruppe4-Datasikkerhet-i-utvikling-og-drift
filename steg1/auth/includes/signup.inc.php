@@ -2,8 +2,8 @@
 
 if(isset($_POST["submitStudent"])) {
 
-    include "../classes/models/User.php";
-    include "../classes/models/Student.php"; 
+    include "../../models/User.php";
+    include "../../models/Student.php"; 
 
     // Grabbing the data, and making a new student object. 
     $student = new Student(
@@ -28,12 +28,14 @@ if(isset($_POST["submitStudent"])) {
     // Going back to the front page
     header("location: ../index.php?error=none"); 
 
-} 
+} else {
+    echo "wrong, there is something wrong with signUpStudent button"; 
+}
 
-if(isset($_POST["signUpLecturer"])) {
+if(isset($_POST["submitLecturer"])) {
 
-    include "../classes/models/User.php";
-    include "../classes/models/Lecturer.php";
+    include "../../models/User.php";
+    include "../../models/Lecturer.php";
 
     // Grabbing the data
     $lecturer = new Lecturer(
@@ -60,4 +62,6 @@ if(isset($_POST["signUpLecturer"])) {
     // Going back to the front page
     header("location: ../index.php?error=none"); 
 
+} else {
+    echo "wrong, there is something wrong with signUpLecturer button"; 
 }

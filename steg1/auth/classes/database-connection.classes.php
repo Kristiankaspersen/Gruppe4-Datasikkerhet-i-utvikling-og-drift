@@ -8,7 +8,7 @@ class DatabaseConnection {
 
             // Default password and username MAMP. Change these if you are working on WAMP, XAMPP or LAMP. 
             // The password we used for our connection: Don't remember. 
-            $servername = "localhost:8888"; 
+            $servername = "localhost:8889"; 
             $username = "root"; 
             $password = "root";  
             $databaseConnection = new PDO("mysql:host=$servername;dbname=GruppeFireDB", $username, $password);
