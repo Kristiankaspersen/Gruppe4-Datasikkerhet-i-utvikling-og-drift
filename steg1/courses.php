@@ -8,6 +8,14 @@
     <title>Steg1-Gruppe4</title>
 </head>
 <body>
+
+<h1>Skriv inn pin kode for ønsket fag</h1>
+<form action="course.php" method="post">
+<input type="number" name="pin_code"><br>
+<input type="submit">
+</form>
+<h1>Fag</h1>
+
 <?php
 // Change for server
 $servername = "localhost:3308";
