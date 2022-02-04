@@ -3,7 +3,7 @@
 // testpost, insert this JSON in postman with POST request: 
 // Add content-type: application/json in headears. 
 // {
-//     "username": "testUser1",
+//     "username": "testUser2",
 //     "firstName": "testfirstname",
 //     "lastName": "testlastname",
 //     "email": "test@email.com",

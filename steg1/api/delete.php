@@ -18,7 +18,7 @@
     $item->id = $data->id;
     
     if($item->deleteEmployee()){
-        echo json_encode("Employee deleted.");
+        echo json_encode("User deleted.");
     } else{
         echo json_encode("Data could not be deleted");
     }

@@ -69,7 +69,7 @@ class Student extends User {
         return $stmt; 
     }
 
-    // Create blog post
+    // Create student 
     public function create() {
 
         $insertUserTable = $this->conn->prepare('INSERT INTO user (username, first_name, last_name, email, password, user_role ) VALUES (?, ?, ?, ?, ?, ?); ');
