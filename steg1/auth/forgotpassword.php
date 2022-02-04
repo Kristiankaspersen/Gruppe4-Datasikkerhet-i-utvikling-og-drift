@@ -35,7 +35,7 @@
     <section class="index-login">
         <div>
             <h4>Forgot password</h4>
-            <p>If you have no account, sign up here!</p>
+            <p>If you forgot your password enter your email to recive a reset link!</p>
             <form action="includes/reset-password.inc.php" method="post">
                 <input type="text" name="email" placeholder="Enter your E-mail">
                 <br>
