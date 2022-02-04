@@ -46,12 +46,20 @@
         <br>
         <div> 
             <h4>Login</h4> 
-            <form action="includes/login.inc.php" method="post">
+            <form action="includes/reset-request.inc.php" method="post">
                 <input type="text" name="usernameOrEmail" placeholder="Username or email">
                 <input type="password" name="password" placeholder="Password">
                 <br>
                 <button type="submit" name="submit">Login</button>
             </form>
+            <?php
+        if (isset($_GET["reset"])){
+            if ($_GET["reset"] == "success"){
+                echo '<p>Check your e-mail!</p>';
+            }
+        }
+             
+            ?>
         </div>
 
 

@@ -20,6 +20,7 @@
             ?>
                 <li><a href="#"><?php echo $_SESSION["username"]; ?></a></li>
                 <li><a href="includes/logout.inc.php">Logout</a></li>
+                
             <?php
                 }
                 else 
@@ -27,6 +28,7 @@
             ?>
                 <li><a href="#">Sign up</a></li>
                 <li><a href="#">Login</a></li>
+                <li><a href="includes/Forgotpassword.php">Glemt passord?</a></li>
             <?php
                 }
             ?>
@@ -80,6 +82,7 @@
                 <input type="password" name="password" placeholder="Password">
                 <br>
                 <button type="submit" name="submit">Login</button>
+                
             </form>
         </div>
 
