@@ -242,3 +242,14 @@ INSERT INTO course (course_id, course_name) VALUES ("OKS12032","Innføring i oks
 INSERT INTO user (username, first_name, last_name, email, password, user_role ) VALUES ('bob', 'geir', 'oksesen', 'geiroksesen@gmail.com', 123 , 'lecturer');
 INSERT INTO lecturer (lecturer_id, profilepicture, course_course_id) VALUES (1 ,'picture/picture', 'ITM30617');
 INSERT INTO lecturer_has_user (lecturer_lecturer_id, user_username) VALUES (1, 'bob'); 
+
+-- -----------------------------------------------------
+-- View `GruppeFireDB`.`pwdReset`
+-- -----------------------------------------------------
+CREATE TABLE pwdReset (
+	pwdResetId int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+	pwdResetEmail TEXT NOT NULL,
+	pwdResetSelector TEXT NOT NULL,
+	pwdResetToken LONGTEXT NOT NULL,
+	pwdResetExpires TEXT NOT NULL
+);
