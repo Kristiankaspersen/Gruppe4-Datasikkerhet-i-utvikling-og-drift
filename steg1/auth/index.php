@@ -19,6 +19,7 @@
                 {
             ?>
                 <li><a href="#"><?php echo $_SESSION["username"]; ?></a></li>
+                <li><a href="classes/Change_Password.php">Change Password</a></li>
                 <li><a href="includes/logout.inc.php">Logout</a></li>
                 
             <?php
