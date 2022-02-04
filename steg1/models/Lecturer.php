@@ -19,7 +19,7 @@ class Lecturer extends User {
                 $this->construct8($args[0], $args[1], $args[2], $args[3], $args[4], $args[5], $args[6], $args[7]); 
             break; 
             default: 
-                trigger_error("Incorrect number of arguments for User::__construct",  E_USER_WARNING);
+                trigger_error("Incorrect number of arguments for Lecturer::__construct",  E_USER_WARNING);
         }
     }
 
