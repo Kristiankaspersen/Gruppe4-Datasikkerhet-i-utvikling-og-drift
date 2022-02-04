@@ -8,6 +8,12 @@ if (isset($_POST["reset-request-submit"])){
 
     $expires = date("U") +1800;
 
+    $userEmail = $_POST["email"];
+
+    require 'DatabaseConnection.php'
+
+    $sqll = "DELETE FROM pwdReset WHERE pwdResetEmail=?";
+
 } else {
     header ("Location:../index.php");
 }
