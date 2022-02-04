@@ -16,6 +16,9 @@ class Lecturer extends User {
             case 1: 
                 $this->construct1($args[0]);
             break;
+            case 3: 
+                $this->construct3($args[0], $args[1], $args[2]);
+            break;
             case 8: 
                 $this->construct8($args[0], $args[1], $args[2], $args[3], $args[4], $args[5], $args[6], $args[7]); 
             break; 
@@ -34,6 +37,12 @@ class Lecturer extends User {
     
     private function construct1($db) {
         $this->conn = $db; 
+    }
+
+    private function construct3($db, $username, $lecturerID) {
+        $this->conn = $db;
+        $this->username = $username;
+        $this->lecturerID = $lecturerID;  
     }
         
     private function construct8($username, $firstName, $lastName,  $email, $password, $passwordRepeat, $profilePictureAdress, $courseID)
@@ -198,29 +207,33 @@ class Lecturer extends User {
         // delete lecturer 
         public function delete() {
 
-            $insertLecturerHasUserTable = $this->conn->prepare('DELETE FROM lecturer_has_user WHERE lecturer_lecturer_id = :lecturer_lecturer_id AND user_username = :username');
+            $insertLecturerHasUserTable = $this->conn->prepare('DELETE FROM lecturer_has_user WHERE lecturer_lecturer_id = :lecturer_id AND user_username = :username');
             $insertLecturerTable = $this->conn->prepare('DELETE FROM lecturer  WHERE lecturer_id = :lecturer_id');
             $insertUserTable = $this->conn->prepare('DELETE FROM user WHERE username = :username');
 
             // Clean data
             $this->username = htmlspecialchars(strip_tags($this->username)); 
             $this->lecturerID = htmlspecialchars(strip_tags($this->lecturerID));
-        
-    
-            // have to do a transaction here or something In case of any of the executions goes wrong. 
-            if(!$insertLecturerHasUserTable->execute(array($this->lecturerID, $this->username))) {
+
+             // Bind data
+            $insertLecturerTable->bindParam(':lecturer_id', $this->lecturerID);
+            $insertLecturerHasUserTable->bindParam(':lecturer_id', $this->lecturerID);
+            $insertLecturerHasUserTable->bindParam(':username', $this->username);
+            $insertUserTable->bindParam(':username', $this->username);
+ 
+            if(!$insertLecturerHasUserTable->execute()) {
                 printf("Error: %s. \n", $insertLecturerHasUserTable->error);
                 $insertLecturerHasUserTable = null;
                 
                 return false; 
             }
-            if(!$insertLecturerTable->execute(array($this->lecturerID))) {
+            if(!$insertLecturerTable->execute()) {
                 printf("Error: %s. \n", $insertLecturerTable->error);
                 $insertLecturerTable = null; 
                 
                 return false;  
         } 
-            if(!$insertUserTable->execute(array($this->username))) {
+            if(!$insertUserTable->execute()) {
                     printf("Error: %s. \n", $insertUserTable->error);
                     $insertUserTable = null; 
                     return false; 

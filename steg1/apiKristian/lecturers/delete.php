@@ -1,5 +1,11 @@
 <?php 
 
+
+// {
+//     "username": "testLecturer2", 
+//     "lecturer_id": "8"
+// }
+
 header('Access-Control-Allow-Origin: *'); 
 header('Content-type: application/json');
 header('Access-Control-Allow_Methods: DELETE');
@@ -18,8 +24,8 @@ $data = json_decode(file_get_contents("php://input"));
 
 $lecturer = new Lecturer(
     $db,
-    $data->lecturer_id,
-    $data->username
+    $data->username,
+    $data->lecturerID
 ); 
 
 // delete lecturer
