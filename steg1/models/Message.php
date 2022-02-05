@@ -2,10 +2,11 @@
 
 class Message {
 
+    private $conn; 
     private $messageID;
     private $courseID; 
     private $studentID; 
-    private $message_text; 
+    private $messageText; 
 
     function __construct() {
         $args = func_get_args(); 
@@ -17,7 +18,10 @@ class Message {
             case 1: 
                 $this->construct1($args[0]);
             break; 
-            case 3: 
+            case 4: 
+                $this->construct4($args[0], $args[1], $args[2], $args[3]);
+            break; 
+            case 5: 
                 $this->construct5($args[0], $args[1], $args[2], $args[3], $args[4]);
             break; 
             default: 
@@ -25,18 +29,28 @@ class Message {
         }
     }
 
+    
+
+    private function construct0() {} 
+
     private function construct1($db) {
         $this->conn = $db; 
     }
 
-    private function construct0() {} 
+    private function construct4($db, $courseID, $studentID, $messageText) {
+        $this->conn = $db;
+        $this->courseID = $courseID;
+        $this->studentID = $studentID; 
+        $this->messageText = $messageText; 
     
-    private function construct5($db, $messageID,  $courseID, $studentID, $message_text) {
+    } 
+    
+    private function construct5($db, $messageID,  $courseID, $studentID, $messageText) {
         $this->conn = $db;
         $this->messageID = $messageID; 
         $this->courseID = $courseID;
         $this->studentID = $studentID; 
-        $this->message_text = $message_text; 
+        $this->messageText = $messageText; 
     
     } 
     
@@ -52,6 +66,25 @@ class Message {
     }
 
     public function create() {
+        $query = "INSERT INTO message(course_course_id, student_student_id, message_text) 
+                  VALUES (?,?,?)  ";
+        
+        $stmt = $this->conn->prepare($query);
+
+        // Clean data: 
+        $this->courseID = htmlspecialchars(strip_tags($this->courseID)); 
+        $this->studentID = htmlspecialchars(strip_tags($this->studentID)); 
+        $this->messageText = htmlspecialchars(strip_tags($this->messageText)); 
+
+        // Execute query 
+        if($stmt->execute(array($this->courseID, $this->studentID, $this->messageText))) {
+            return true; 
+        }
+
+        // Print error if something goes wrong
+        printf("Error: %s. \n", $stmt->error); 
+
+        return false; 
 
     }
 

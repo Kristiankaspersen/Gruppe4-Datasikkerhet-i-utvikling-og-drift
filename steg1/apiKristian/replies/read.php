@@ -34,7 +34,6 @@ if ($num > 0) {
 
         // push to "data"  
         array_push($reply_arr['data'], $reply_item); 
-
     }
 
   // Turn to JSON and Output: 

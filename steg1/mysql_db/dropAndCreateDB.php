@@ -33,7 +33,7 @@ try {
     // setting the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
    
-    $query = file_get_contents("Gruppe4ForwardEngineer.sql");
+    $query = file_get_contents("GruppeFireDB.sql");
     $conn->exec($query);
     echo "Tables and all deafault data successfully inserted in the DB \n";
     }

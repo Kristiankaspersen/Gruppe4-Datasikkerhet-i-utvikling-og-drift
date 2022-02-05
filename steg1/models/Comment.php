@@ -4,7 +4,7 @@ class Comment {
 
 
     private $conn; 
-    private $commentID;
+    private $commentID; //Do a autoincrement from the db here. 
     private $messageID;
     private $commentText;  
 
@@ -18,6 +18,9 @@ class Comment {
             case 1: 
                 $this->construct1($args[0]);
             break;
+            case 3: 
+                $this->construct3($args[0], $args[1], $args[2]);
+            break;
             case 4: 
                 $this->construct4($args[0], $args[1], $args[2], $args[3]);
             break;
@@ -30,6 +33,11 @@ class Comment {
     
     private function construct1($db) {
         $this->conn = $db; 
+    }
+    private function construct3($db, $messageID, $commentText) {
+        $this->conn = $db; 
+        $this->messageID = $messageID;
+        $this->commentText = $commentText; 
     }
 
     private function construct4($db, $commentID, $messageID, $commentText) {
@@ -49,7 +57,27 @@ class Comment {
         return $stmt; 
     }
 
-    public function create() {}
+    public function create() {
+        $query = "INSERT INTO comment(message_message_id, comment_text) 
+                  VALUES (?,?)  ";
+        
+        $stmt = $this->conn->prepare($query);
+
+        // Clean data: 
+        $this->messageID = htmlspecialchars(strip_tags($this->messageID)); 
+        $this->commentText = htmlspecialchars(strip_tags($this->commentText)); 
+
+        // Execute query 
+        if($stmt->execute(array($this->messageID, $this->commentText))) {
+            return true; 
+        }
+
+        // Print error if something goes wrong
+        printf("Error: %s. \n", $stmt->error); 
+
+        return false; 
+
+    }
 
     public function update() { 
 

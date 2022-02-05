@@ -37,7 +37,7 @@ if ($num > 0) {
     }
 
   // Turn to JSON and Output: 
-  echo json_encode($course_arr);
+  echo json_encode($comment_arr);
 
 }  else {
     echo json_encode(array('message' => 'No comment found')); 
