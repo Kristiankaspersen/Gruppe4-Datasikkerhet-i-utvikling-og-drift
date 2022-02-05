@@ -19,9 +19,9 @@ $data = json_decode(file_get_contents("php://input"));
 // private $courseID; private $courseName; private $pinCode;
 $course = new Course(
     $db,
-    $data->courseID,
-    $data->courseName, 
-    $data->pinCode
+    $data->course_id,
+    $data->course_name, 
+    $data->pin_code
 ); 
 
 // create post

@@ -18,6 +18,9 @@ class Comment {
             case 1: 
                 $this->construct1($args[0]);
             break;
+            case 2: 
+                $this->construct2($args[0], $args[1]);
+            break;
             case 3: 
                 $this->construct3($args[0], $args[1], $args[2]);
             break;
@@ -33,6 +36,10 @@ class Comment {
     
     private function construct1($db) {
         $this->conn = $db; 
+    }
+    private function construct2($db, $commentID) {
+        $this->conn = $db; 
+        $this->commentID = $commentID; 
     }
     private function construct3($db, $messageID, $commentText) {
         $this->conn = $db; 
@@ -83,8 +90,30 @@ class Comment {
 
     }
 
-    public function delete() { 
+    function delete() {
 
+        $query = "DELETE FROM comment WHERE comment_id = :id"; 
+
+        // Prepare statement 
+        $stmt = $this->conn->prepare($query); 
+
+        // Clean data
+        $this->commentID = htmlspecialchars(strip_tags($this->commentID)); 
+
+        // Bind data
+        $stmt->bindParam(':id', $this->commentID);
+        
+        // Execute query 
+        if($stmt->execute()) {
+            return true; 
+        }
+
+        // Print error if something goes wrong
+        printf("Error: %s. \n", $stmt->error); 
+
+        return false; 
+
+        
     }
 
 

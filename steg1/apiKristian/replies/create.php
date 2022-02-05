@@ -1,5 +1,14 @@
 <?php 
 
+// JSON send with post request. 
+
+// {
+//     "messageID": "1",
+//     "lecturerID": "1",
+//     "replyText": "noob"
+// }
+
+
 header('Access-Control-Allow-Origin: *'); 
 header('Content-type: application/json');
 header('Access-Control-Allow_Methods: POST');
@@ -15,7 +24,7 @@ $db = $database->connect();
 // Get raw posted data
 $data = json_decode(file_get_contents("php://input")); 
 
-// Instantiate comment post object 
+// Instantiate reply object 
 $reply = new Reply(
     $db,
     $data->messageID,

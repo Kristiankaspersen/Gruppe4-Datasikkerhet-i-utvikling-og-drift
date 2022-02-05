@@ -25,7 +25,7 @@ if ($num > 0) {
         extract($row); 
 
         // Do this, with$lecturer data: 
-        $course_item = array(
+        $reply_item = array(
             'message_message_id' => $message_message_id,
             'lecturer_lecturer_id' => $lecturer_lecturer_id,
             'reply_text' => $reply_text

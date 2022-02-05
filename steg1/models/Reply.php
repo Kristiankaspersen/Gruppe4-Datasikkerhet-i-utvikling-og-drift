@@ -6,7 +6,7 @@ private $conn;
 
 private $messageID;
 private $lecturerID; 
-private $reply_text; 
+private $replyText; 
 
 function __construct() {
     $args = func_get_args(); 
@@ -30,11 +30,11 @@ private function construct0() {}
 
 private function construct1($db) { $this->conn = $db; }   
 
-private function construct4($db, $messageID, $lecturerID, $reply_text) {
+private function construct4($db, $messageID, $lecturerID, $replyText) {
     $this->conn = $db; 
     $this->messageID = $messageID; 
     $this->lecturerID = $lecturerID; 
-    $this->$reply_text = $reply_text; 
+    $this->replyText = $replyText; 
 
 } 
 
@@ -50,6 +50,25 @@ public function read() {
 }
 
 public function create() {
+    $query = "INSERT INTO reply(message_message_id, lecturer_lecturer_id, reply_text) 
+              VALUES (?, ?, ?)  ";
+    
+    $stmt = $this->conn->prepare($query);
+
+    // Clean data: 
+    $this->messageID = htmlspecialchars(strip_tags($this->messageID)); 
+    $this->lecturerID = htmlspecialchars(strip_tags($this->lecturerID)); 
+    $this->replyText = htmlspecialchars(strip_tags($this->replyText)); 
+
+    // Execute query 
+    if($stmt->execute(array($this->messageID, $this->lecturerID, $this->replyText))) {
+        return true; 
+    }
+
+    // Print error if something goes wrong
+    printf("Error: %s. \n", $stmt->error); 
+
+    return false; 
 
 }
 

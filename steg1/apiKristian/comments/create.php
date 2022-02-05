@@ -1,8 +1,8 @@
 <?php 
 
 // {
-//     "messageID": "1",  
-//     "commentText": "What are you doing? I am a person you know? I have something you don't, did you know that?"
+//     "message_id": "1",  
+//     "comment_text": "What are you doing? I am a person you know? I have something you don't, did you know that?"
 // }
 
 header('Access-Control-Allow-Origin: *'); 
@@ -24,8 +24,8 @@ $data = json_decode(file_get_contents("php://input"));
 //$db, $messageID, $commentText
 $comment = new Comment(
     $db,
-    $data->messageID,
-    $data->commentText
+    $data->message_id,
+    $data->comment_text
 ); 
 
 // create post

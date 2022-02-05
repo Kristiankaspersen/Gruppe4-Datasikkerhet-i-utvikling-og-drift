@@ -27,7 +27,7 @@ if ($num > 0) {
         // Do this, with$lecturer data: 
         $comment_item = array(
             'comment_id' => $comment_id,
-            'message_message_id' => $message_message_id,
+            'message_id' => $message_message_id,
             'comment_text' => $comment_text
         );
 
