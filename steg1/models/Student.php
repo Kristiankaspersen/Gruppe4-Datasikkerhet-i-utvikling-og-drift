@@ -3,6 +3,7 @@
 class Student extends User { 
     private $conn; 
 
+    private $studentID; 
     private $fieldOfStudy; 
     private $startingYear; 
 
@@ -16,6 +17,9 @@ class Student extends User {
             break; 
             case 1: 
                 $this->construct1($args[0]);
+            break;
+            case 3: 
+                $this->construct3($args[0], $args[1], $args[2]);
             break;
             case 8: 
                 $this->construct8($args[0], $args[1], $args[2], $args[3], $args[4], $args[5], $args[6], $args[7]); 
@@ -32,6 +36,12 @@ class Student extends User {
     
     private function construct1($db) {
         $this->conn = $db; 
+    }
+
+    private function construct3($db, $username, $studentID) {
+        parent::__construct($username);
+        $this->conn = $db;
+        $this->studentID = $studentID;  
     }
 
     private function construct9($db, $username, $firstName, $lastName,  $email, $password, $passwordRepeat, $fieldOfStudy, $startingYear)
@@ -130,6 +140,48 @@ class Student extends User {
 
         return true; 
     
+    }
+
+    // delete lecturer 
+    public function delete() {
+
+        $insertStudentHasUserTable = $this->conn->prepare('DELETE FROM student_has_user WHERE student_student_id = :student_id AND user_username = :username');
+        $insertStudentTable = $this->conn->prepare('DELETE FROM student  WHERE student_id = :student_id');
+        $insertUserTable = $this->conn->prepare('DELETE FROM user WHERE username = :username');
+
+        // Clean data
+        $this->username = htmlspecialchars(strip_tags($this->username)); 
+        $this->studentID = htmlspecialchars(strip_tags($this->studentID));
+
+            // Bind data
+        $insertStudentTable->bindParam(':student_id', $this->studentID);
+        $insertStudentHasUserTable->bindParam(':student_id', $this->studentID);
+        $insertStudentHasUserTable->bindParam(':username', $this->username);
+        $insertUserTable->bindParam(':username', $this->username);
+
+        if(!$insertStudentHasUserTable->execute()) {
+            printf("Error: %s. \n", $insertStudentHasUserTable->error);
+            $insertStudentHasUserTable = null;
+            
+            return false; 
+        }
+        if(!$insertStudentTable->execute()) {
+            printf("Error: %s. \n", $insertStudentTable->error);
+            $insertStudentTable = null; 
+            
+            return false;  
+        } 
+        if(!$insertUserTable->execute()) {
+                printf("Error: %s. \n", $insertUserTable->error);
+                $insertUserTable = null; 
+                return false; 
+        } 
+        
+        $insertUserTable = null; 
+        $insertStudentTable = null; 
+        $insertStudentHasUserTable = null;
+
+        return true;
     }
 
 
