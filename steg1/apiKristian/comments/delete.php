@@ -28,8 +28,8 @@ $comment = new Comment(
 
 // delete student
 if($comment->delete()) {
-    echo json_encode( array('message' => 'Student deleted')); 
+    echo json_encode( array('message' => 'Comment deleted')); 
 } else {
 
-    echo json_encode( array('message' => 'Student deleted'));
+    echo json_encode( array('message' => 'Comment not deleted'));
 }

@@ -86,7 +86,30 @@ class Comment {
 
     }
 
-    public function update() { 
+    public function update() {
+        $query = "UPDATE comment 
+                  SET comment_text = :comment_text 
+                  WHERE comment_id = :comment_id; ";
+        
+        $stmt = $this->conn->prepare($query);
+
+        // Clean data: 
+
+        $this->commentID = htmlspecialchars(strip_tags($this->commentID)); 
+        $this->commentText = htmlspecialchars(strip_tags($this->commentText)); 
+
+        $stmt->bindParam(":comment_text", $this->commentText); 
+        $stmt->bindParam(":comment_id", $this->commentID); 
+
+        // Execute query 
+        if($stmt->execute()) {
+            return true; 
+        }
+
+        // Print error if something goes wrong
+        printf("Error: %s. \n", $stmt->error); 
+
+        return false; 
 
     }
 
@@ -113,7 +136,12 @@ class Comment {
 
         return false; 
 
-        
+    }
+
+    //setter: 
+
+    public function getCommentText($commentText) {
+        $this->commentText = $commentText; 
     }
 
 
