@@ -51,6 +51,27 @@ class Course {
     }
 
     public function create() {
+        $query = "INSERT INTO course(course_id, course_name, pin_code) 
+                  VALUES (?, ?, ?)  ";
+        
+        $stmt = $this->conn->prepare($query);
+
+        // Clean data: 
+        $this->courseID = htmlspecialchars(strip_tags($this->courseID)); 
+        $this->courseName = htmlspecialchars(strip_tags($this->courseName)); 
+        $this->pinCode = htmlspecialchars(strip_tags($this->pinCode)); 
+
+        // Execute query 
+        if($stmt->execute(array($this->courseID, $this->courseName, $this->pinCode))) {
+            return true; 
+        }
+
+        // Print error if something goes wrong
+        printf("Error: %s. \n", $stmt->error); 
+
+        return false; 
+
+
 
     }
 

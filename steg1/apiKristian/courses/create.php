@@ -26,9 +26,9 @@ $course = new Course(
 
 // create post
 if($course->create()) {
-    echo json_encode( array('message' => 'Comment Created')); 
+    echo json_encode( array('message' => 'New course Created')); 
 } else {
 
-    echo json_encode( array('message' => 'Comment Not Created'));
+    echo json_encode( array('message' => 'Course Not Created'));
 
 }
