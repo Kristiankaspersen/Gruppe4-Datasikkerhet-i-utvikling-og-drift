@@ -25,8 +25,12 @@
                     ?>
                     <form action="includes/reset-password.inc.php" method="post">
                         <input type="hidden" name="selector" value= "<?php echo $selector ?>">
-
-
+                        <input type="hidden" name="validator" value= "<?php echo $validator ?>">
+                        <input type="password" name ="pwd" placeholder="Enter your new password..">
+                        <input type="password" name ="pwd-repeat" placeholder="Repeat your new password">
+                        <button type="submit" name="reset-password-submit">Reset your password </button>
+                    </form>
+                    
                     <?php
 
 
