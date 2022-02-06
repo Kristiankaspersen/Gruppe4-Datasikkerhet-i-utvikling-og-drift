@@ -10,7 +10,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "DROP SCHEMA gruppefiredb;";
+$sql = "DROP SCHEMA GruppeFireDB;";
 if (mysqli_query($conn, $sql)) { 
     echo "Old DB dropped \n"; 
 } else { 
