@@ -44,6 +44,7 @@ class Login extends DatabaseConnection {
 
             if ($user[0]["user_role"] === "lecturer") {
 
+                // Getting infomrmation from lecturer_has_user first: 
                 $lecturerStmt = $this->connect()->prepare('SELECT * FROM lecturer_has_user WHERE user_username = ?;'); 
 
                 $lecturerStmt->execute(array($user[0]["username"])); 
@@ -52,6 +53,17 @@ class Login extends DatabaseConnection {
 
                 $_SESSION["user_role"] = $user[0]["user_role"]; 
                 $_SESSION["lecturer_id"] = $lecturer_has_user[0]["lecturer_lecturer_id"]; 
+
+                // Then getting information from lecturer table: 
+                $lecturerStmt = $this->connect()->prepare('SELECT * FROM lecturer WHERE lecturer_id = ?;');
+
+                $lecturerStmt->execute(array($user[0]["lecturer_lecturer_id"]));
+
+                $lecturer = $lecturerStmt->fetchAll(PDO::FETCH_ASSOC);
+
+                $_SESSION["course_id"] = $lecturer[0]["course_course_id"]; 
+                $_SESSION["profilepicture"] = $lecturer[0]["profilepicture"];
+
 
             } elseif ($user[0]["user_role"] === "student") {
 
