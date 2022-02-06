@@ -102,7 +102,28 @@ class Course {
 
     }
 
-    public function delete() { 
+    function delete() {
+
+        $query = "DELETE FROM course WHERE course_id = :id"; 
+
+        // Prepare statement 
+        $stmt = $this->conn->prepare($query); 
+
+        // Clean data
+        $this->courseID = htmlspecialchars(strip_tags($this->courseID)); 
+
+        // Bind data
+        $stmt->bindParam(':id', $this->courseID);
+        
+        // Execute query 
+        if($stmt->execute()) {
+            return true; 
+        }
+
+        // Print error if something goes wrong
+        printf("Error: %s. \n", $stmt->error); 
+
+        return false; 
 
     }
 

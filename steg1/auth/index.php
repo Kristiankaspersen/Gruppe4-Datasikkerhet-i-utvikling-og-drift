@@ -57,7 +57,7 @@
         <div>
             <h4>Sign up lecturer</h4>
             <p>If you have no account, sign up here!</p>
-            <form action="includes/signup.inc.php" method="post">
+            <form action="includes/signup.inc.php" method="post" enctype="multipart/form-data">
                 <input type="text" name="username" placeholder="username">
                 <input type="text" name="first_name" placeholder="first name">
                 <input type="text" name="last_name" placeholder="last name">
@@ -71,6 +71,7 @@
                     <option value="BVN13092">Utvikling av interaktive bavianer</option>
                     <option value="OKS12032">Innføring i okse</option>
                 </select>
+                <input type="file" name="file">
                 <br>
                 <button type="submit" name="submitLecturer">Sign up lecturer</button>
             </form>
