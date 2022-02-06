@@ -1,5 +1,12 @@
 <?php 
 
+// PUT Request: 
+// {
+//     "course_id": "ITM30618",
+//     "course_name": "Innføring i innføring",
+//     "pin_code": "1234"
+// }
+
 header('Access-Control-Allow-Origin: *'); 
 header('Content-type: application/json');
 header('Access-Control-Allow_Methods: POST');

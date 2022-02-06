@@ -71,11 +71,34 @@ class Course {
 
         return false; 
 
-
-
     }
 
-    public function update() { 
+    public function update() {
+        $query = "UPDATE course
+                  SET course_name = :course_name,
+                      pin_code = :pin_code  
+                  WHERE course_id = :course_id;";
+        
+        $stmt = $this->conn->prepare($query);
+
+        // Clean data: 
+        $this->courseID = htmlspecialchars(strip_tags($this->courseID)); 
+        $this->courseName = htmlspecialchars(strip_tags($this->courseName)); 
+        $this->pinCode = htmlspecialchars(strip_tags($this->pinCode)); 
+
+        $stmt->bindParam(":course_name", $this->courseName );
+        $stmt->bindParam(":pin_code", $this->pinCode );
+        $stmt->bindParam(":course_id", $this->courseID );
+
+        // Execute query 
+        if($stmt->execute()) {
+            return true; 
+        }
+
+        // Print error if something goes wrong
+        printf("Error: %s. \n", $stmt->error); 
+
+        return false; 
 
     }
 
