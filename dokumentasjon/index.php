@@ -111,57 +111,8 @@
 <p>
     Her er det beskrevet hvilke funksjoner vårt API har. API-kallene blir kjørt når man fyller ut skjemaet på /auth for student/foreleser
 </p>
-<p><b>
-    Legge til bruker
-</b></p>
+<p> Se mer <a href="../api/dokumentasjon">her</a> </p>
 
-<p>
-    <ul>
-        <li>
-            liste
-        </li>
-
-    </ul>
-</p>
-
-<p><b>
-    Slette bruker
-</b></p>
-
-<p>
-    <ul>
-        <li>
-            liste
-        </li>
-
-    </ul>
-</p>
-
-<p><b>
-    Oppdatere bruker
-</b></p>
-
-<p>
-    <ul>
-        <li>
-            liste
-        </li>
-
-    </ul>
-</p>
-
-<p><b>
-    Lese brukerdata
-</b></p>
-
-<p>
-    <ul>
-        <li>
-            liste
-        </li>
-
-    </ul>
-</p>
 
 <h2> Meldinger og kommentarer </h2>
 <p>
