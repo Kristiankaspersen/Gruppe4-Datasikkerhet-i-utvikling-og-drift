@@ -15,10 +15,21 @@
     <nav>
         <ul>
             <?php 
-                if(isset($_SESSION["username"])) 
+                if(isset($_SESSION["username"]) && $_SESSION["user_role"] === "student") 
                 {
             ?>
                 <li><a href="#"><?php echo $_SESSION["username"]; ?></a></li>
+                <li><a href="#"><?php echo $_SESSION["student_id"]; ?></a></li>
+                <li><a href="classes/Change_Password.php">Change Password</a></li>
+                <li><a href="includes/logout.inc.php">Logout</a></li>
+
+            <?php
+                }
+                elseif(isset($_SESSION["username"]) && $_SESSION["user_role"] === "lecturer")
+                {
+            ?>
+                <li><a href="#"><?php echo $_SESSION["username"]; ?></a></li>
+                <li><a href="#"><?php echo $_SESSION["lecturer_id"]; ?></a></li>
                 <li><a href="classes/Change_Password.php">Change Password</a></li>
                 <li><a href="includes/logout.inc.php">Logout</a></li>
                 
