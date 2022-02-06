@@ -12,7 +12,7 @@
 </head>
 <body>
 <?php
-// Change for server
+// TODO: Change for server
 $servername = "localhost:3308";
 $username = "root";
 $password = "root";
@@ -20,23 +20,22 @@ $dbName = "GruppeFireDB";
 
 $mysqli = new mysqli($servername, $username, $password, $dbName);
 
-echo "<h1>" .$_GET['course']. "</h1>";
-
 $has_pin_access = FALSE;
 $has_lecture_access = FALSE;
+$has_student_access = FALSE;
+
+if (isset($_GET['course'])){
+    $course_id = $_GET['course'];
+}
 
 if (isset($_POST["pin_code"])){
     $query = "select course_id, course_name from course where pin_code = '{$_POST['pin_code']}'";
     if ($result = $mysqli->query($query)){
         while(($row = $result->fetch_assoc())){
-            $courseId = $row["course_id"];
-            $courseName = $row["course_name"];
+            $course_id = $row["course_id"];
+            $course_name = $row["course_name"];
             
-            echo "
-            <tr>
-            <td><a href='course.php?course=".$courseId."'>" .$courseId. "</a></td>
-                <td>" .$courseName. "</td>
-            </tr>";
+            $has_pin_access = TRUE;
             
         }    
         $result->free();    
@@ -48,9 +47,6 @@ else if (isset($_SESSION["username"])){
     if ($result = $mysqli->query($query)){
         while(($row = $result->fetch_assoc())){
             if ($row["user_role"] == "lecturer"){
-                // saving lecturer id in session is not implemented. 
-                // set as 1 to test
-                $_SESSION["lecturer_id"] = 1;
                 $newquery = "select lecturer_id, course_course_id from lecturer where lecturer_id = '{$_SESSION['lecturer_id']}'";
                 if ($newresult = $mysqli->query($newquery)){
                     while(($newrow = $newresult->fetch_assoc())){
@@ -64,16 +60,45 @@ else if (isset($_SESSION["username"])){
                 $newresult->free(); 
                 }
             }
+            else{
+                $has_student_access = TRUE;
+            }
         }    
         $result->free();    
     }
 }
-else{
-    echo "<h1>Du har ikke tilgang til dette emnet, <a href='courses.php'>Gå tilbake</a></h1>";
-}
 
 if ($has_lecture_access == TRUE){
-    echo "<h1>Foreleser i dette emnet logget inn</h1>";
+    $query = "select message_id, message_text from message where course_course_id = '{$course_id}'";
+    echo "<h1>Meldinger</h1>";
+    if ($result = $mysqli->query($query)){
+        while(($row = $result->fetch_assoc())){
+            // TODO: href to correct page
+            echo "<div><a href='#'><h3>Id: {$row['message_id']}</h3> <p>{$row['message_text']}</p></a></div>";
+        }    
+        $result->free();    
+    }
+}
+else if ($has_pin_access == TRUE){
+    $query = "select message_id, message_text from message where course_course_id = '{$course_id}'";
+    echo "<h1>Meldinger</h1>";
+    if ($result = $mysqli->query($query)){
+        while(($row = $result->fetch_assoc())){
+            // TODO: href to correct page
+            echo "<div><a href='#'><h3>Id: {$row['message_id']}</h3> <p>{$row['message_text']}</p></a></div>";
+        }    
+        $result->free();    
+    }
+}
+else if ($has_student_access == TRUE){
+    // TODO: redirect to page for sending message
+    echo "<h1> STUDENT </h1>";
+    // uncomment to redirect
+    // header("Location: #");
+    // exit();
+}
+else {
+    echo "<h1>Du har ikke tilgang til dette emnet, <a href='courses.php'>Gå tilbake</a></h1>";
 }
 
 ?>
