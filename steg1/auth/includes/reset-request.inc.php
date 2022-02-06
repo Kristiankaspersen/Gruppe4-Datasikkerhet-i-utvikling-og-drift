@@ -12,7 +12,7 @@ if (isset($_POST["reset-request-submit"])){
 
     require 'DatabaseConnection.php';
 
-    $sql = "DELETE FROM pwdReset WHERE pwdResetEmail=?";
+    $sql = "DELETE FROM pwdReset WHERE pwdResetEmail=?;";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare)($stmt, $sql){
         echo "There was an error";
