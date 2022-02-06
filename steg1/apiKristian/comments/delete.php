@@ -2,8 +2,7 @@
 
 
 // {
-//     "username": "testStudent1", 
-//     "studentID": "8"
+//     "comment_id": "1", 
 // }
 
 header('Access-Control-Allow-Origin: *'); 
@@ -13,7 +12,7 @@ header('Access-Control-Allow-Headers: Access-Control_Allow-Headers, Content-Type
 
 include '../../config/DatabaseConnection.php';
 include '../../models/User.php'; 
-include '../../models/Student.php'; 
+include '../../models/Comment.php'; 
 
 // instantiate DB and connect. 
 $database = new DatabaseConnection(); 
@@ -22,16 +21,15 @@ $db = $database->connect();
 // Get raw posted data
 $data = json_decode(file_get_contents("php://input"));
 
-$student = new Student(
+$comment = new Comment(
     $db,
-    $data->username,
-    $data->studentID
+    $data->comment_id,
 ); 
 
 // delete student
-if($student->delete()) {
-    echo json_encode( array('message' => 'Student deleted')); 
+if($comment->delete()) {
+    echo json_encode( array('message' => 'Comment deleted')); 
 } else {
 
-    echo json_encode( array('message' => 'Student deleted'));
+    echo json_encode( array('message' => 'Comment not deleted'));
 }

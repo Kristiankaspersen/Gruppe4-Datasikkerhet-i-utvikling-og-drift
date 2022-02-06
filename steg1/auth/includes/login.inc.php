@@ -11,6 +11,8 @@ if(isset($_POST["submit"])) {
     include "../controller/LoginController.php"; 
     $login = new LoginController($usernameOrEmail, $password); 
 
+    
+
     $login->loginUser(); 
 
     // Going back to the front page 

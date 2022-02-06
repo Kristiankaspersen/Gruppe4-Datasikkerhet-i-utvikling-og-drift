@@ -15,6 +15,9 @@ class User {
             case 0: 
                 $this->construct0();
             break; 
+            case 1: 
+                $this->construct1($args[0]);
+            break; 
             case 6: 
                 $this->construct6($args[0], $args[1], $args[2], $args[3], $args[4], $args[5]); 
             break; 
@@ -24,6 +27,10 @@ class User {
     }
 
     private function construct0() {
+    }
+
+    private function construct1($username) {
+        $this->username = $username; 
     }
 
     private function construct6($username, $firstName, $lastName,  $email, $password, $passwordRepeat) { 

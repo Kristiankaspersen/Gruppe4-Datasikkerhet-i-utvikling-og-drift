@@ -34,6 +34,43 @@ if(isset($_POST["submitStudent"])) {
 
 if(isset($_POST["submitLecturer"])) {
 
+    echo $_FILES["file"]; 
+    $file = $_FILES["file"];
+
+    echo "$file"; 
+
+    $fileName = $file['name']; 
+    $fileTmpName = $file['tmp_name']; 
+    $fileSize = $file['size']; 
+    $fileError = $file['error']; 
+    $fileType = $file['type']; 
+
+    $fileExt = explode('.', $fileName); 
+    $fileActualExt = strtolower(end($fileExt)); 
+
+    $allowed = array('jpg', 'jpeg', 'png'); 
+
+    if(in_array($fileActualExt, $allowed)) {
+        if($fileError === 0) {
+            if($fileSize < 500000) {
+                $fileNameNew = uniqid('', true).".".$fileActualExt;
+                $fileDestination = '../../uploads/'.$fileNameNew;
+                move_uploaded_file($fileTmpName, $fileDestination);
+            } else {
+                echo "You file is to big!"; 
+                exit(); 
+            }
+
+        } else {
+            echo "There was an error uploading your file"; 
+            exit(); 
+
+        }
+    } else {
+        echo "You cannot upload files of this type! Only jpg or png"; 
+        exit(); 
+    }
+
     include "../../models/User.php";
     include "../../models/Lecturer.php";
 
@@ -45,7 +82,7 @@ if(isset($_POST["submitLecturer"])) {
         $_POST["email"], 
         $_POST["password"], 
         $_POST["passwordRepeat"], 
-        "testProfilePicture.png", 
+        $fileNameNew, 
         $_POST["course"]
     );
 

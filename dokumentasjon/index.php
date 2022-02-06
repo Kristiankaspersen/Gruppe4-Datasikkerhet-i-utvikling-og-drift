@@ -39,6 +39,7 @@
         <li>
             Registrere seg med navn, epost, brukernavn, studieretning og passord.
         </li>
+        <br><img src="img/student_signup.png"/>
         <li>
             Logger inn med med brukernavn/epost og passord.
         </li>
@@ -51,10 +52,6 @@
         <li>
             Utføre glemt passord.
         </li>
-        <li>
-            Se alle meldinger og svar for et valgt emne.
-        </li>
-
     </ul>
 </p>
 
@@ -67,9 +64,12 @@
     <ul>
         <li>
             Registrere seg med navn, epost, brukernavn, emne og passord.
+            <br><img src="img/lecture_signup.png"/>
         </li>
+        
         <li>
             Logger inn med med brukernavn/epost og passord.
+            <br><img src="img/login.png"/>
         </li>
         <li>
             Se alle meldinger og svar for et valgt emne.
@@ -108,25 +108,24 @@
 <h2>
     API
 </h2>
-
-<p><b>
-    Legge til bruker
-</b></p>
-
-<p><b>
-    Slette bruker
-</b></p>
-
-<p><b>
-    Oppdatere bruker
-</b></p>
+<p>
+    Her er det beskrevet hvilke funksjoner vårt API har. API-kallene blir kjørt når man fyller ut skjemaet på /auth for student/foreleser
+</p>
+<p> Se mer <a href="../api/dokumentasjon">her</a> </p>
 
 
-<p><b>
-    Lese brukerdata
-</b></p>
+<h2> Meldinger og kommentarer </h2>
+<p>
+    <ul>
+        <li>
+            Gjestebrukere kan kommentere
+        </li>
+        <li>
+            Studenter kan sende anonyme meldinger
+        </li>
 
-
+    </ul>
+</p>
 
 </body>
 </html>

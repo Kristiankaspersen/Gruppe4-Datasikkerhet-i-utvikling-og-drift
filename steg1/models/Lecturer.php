@@ -40,8 +40,8 @@ class Lecturer extends User {
     }
 
     private function construct3($db, $username, $lecturerID) {
+        parent::__construct($username);
         $this->conn = $db;
-        $this->username = $username;
         $this->lecturerID = $lecturerID;  
     }
         
@@ -204,47 +204,47 @@ class Lecturer extends User {
     
     }
 
-        // delete lecturer 
-        public function delete() {
+    // delete lecturer 
+    public function delete() {
 
-            $insertLecturerHasUserTable = $this->conn->prepare('DELETE FROM lecturer_has_user WHERE lecturer_lecturer_id = :lecturer_id AND user_username = :username');
-            $insertLecturerTable = $this->conn->prepare('DELETE FROM lecturer  WHERE lecturer_id = :lecturer_id');
-            $insertUserTable = $this->conn->prepare('DELETE FROM user WHERE username = :username');
+        $insertLecturerHasUserTable = $this->conn->prepare('DELETE FROM lecturer_has_user WHERE lecturer_lecturer_id = :lecturer_id AND user_username = :username');
+        $insertLecturerTable = $this->conn->prepare('DELETE FROM lecturer  WHERE lecturer_id = :lecturer_id');
+        $insertUserTable = $this->conn->prepare('DELETE FROM user WHERE username = :username');
 
-            // Clean data
-            $this->username = htmlspecialchars(strip_tags($this->username)); 
-            $this->lecturerID = htmlspecialchars(strip_tags($this->lecturerID));
+        // Clean data
+        $this->username = htmlspecialchars(strip_tags($this->username)); 
+        $this->lecturerID = htmlspecialchars(strip_tags($this->lecturerID));
 
-             // Bind data
-            $insertLecturerTable->bindParam(':lecturer_id', $this->lecturerID);
-            $insertLecturerHasUserTable->bindParam(':lecturer_id', $this->lecturerID);
-            $insertLecturerHasUserTable->bindParam(':username', $this->username);
-            $insertUserTable->bindParam(':username', $this->username);
- 
-            if(!$insertLecturerHasUserTable->execute()) {
-                printf("Error: %s. \n", $insertLecturerHasUserTable->error);
-                $insertLecturerHasUserTable = null;
-                
-                return false; 
-            }
-            if(!$insertLecturerTable->execute()) {
-                printf("Error: %s. \n", $insertLecturerTable->error);
-                $insertLecturerTable = null; 
-                
-                return false;  
-        } 
-            if(!$insertUserTable->execute()) {
-                    printf("Error: %s. \n", $insertUserTable->error);
-                    $insertUserTable = null; 
-                    return false; 
-            } 
-            
-            $insertUserTable = null; 
-            $insertLecturerTable = null; 
+            // Bind data
+        $insertLecturerTable->bindParam(':lecturer_id', $this->lecturerID);
+        $insertLecturerHasUserTable->bindParam(':lecturer_id', $this->lecturerID);
+        $insertLecturerHasUserTable->bindParam(':username', $this->username);
+        $insertUserTable->bindParam(':username', $this->username);
+
+        if(!$insertLecturerHasUserTable->execute()) {
+            printf("Error: %s. \n", $insertLecturerHasUserTable->error);
             $insertLecturerHasUserTable = null;
-    
-            return true;
+            
+            return false; 
         }
+        if(!$insertLecturerTable->execute()) {
+            printf("Error: %s. \n", $insertLecturerTable->error);
+            $insertLecturerTable = null; 
+            
+            return false;  
+    } 
+        if(!$insertUserTable->execute()) {
+                printf("Error: %s. \n", $insertUserTable->error);
+                $insertUserTable = null; 
+                return false; 
+        } 
+        
+        $insertUserTable = null; 
+        $insertLecturerTable = null; 
+        $insertLecturerHasUserTable = null;
+
+        return true;
+    }
 
 
 

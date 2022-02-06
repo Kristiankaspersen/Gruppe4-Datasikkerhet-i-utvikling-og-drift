@@ -42,56 +42,39 @@ if (isset($_POST["pin_code"])){
         $result->free();    
     }
 }
+
+else if (isset($_SESSION["username"])){
+    $query = "select username, user_role from user where username = '{$_SESSION['username']}'";
+    if ($result = $mysqli->query($query)){
+        while(($row = $result->fetch_assoc())){
+            if ($row["user_role"] == "lecturer"){
+                // saving lecturer id in session is not implemented. 
+                // set as 1 to test
+                $_SESSION["lecturer_id"] = 1;
+                $newquery = "select lecturer_id, course_course_id from lecturer where lecturer_id = '{$_SESSION['lecturer_id']}'";
+                if ($newresult = $mysqli->query($newquery)){
+                    while(($newrow = $newresult->fetch_assoc())){
+                        if ($newrow["course_course_id"] == $_GET["course"]){
+                            $has_lecture_access = TRUE; 
+                        }
+                        else{
+                            echo "<h1>Du er ikke foreleser i dette emnet, <a href='courses.php'>Gå tilbake</a></h1>";
+                        }
+                    }   
+                $newresult->free(); 
+                }
+            }
+        }    
+        $result->free();    
+    }
+}
 else{
-    echo "You do not have access to this course";
+    echo "<h1>Du har ikke tilgang til dette emnet, <a href='courses.php'>Gå tilbake</a></h1>";
 }
 
-
-// TODO
-// course code on top, can be retrieved with $_GET['course'] (param in url)
-// if logged in user is lecturer in course, display all messages, option to reply to messages
-// else if access through pin, display all messages, option to comment on messages
-// else display message
-
-// if lecture access
-// else  if pin access
-// else if student access
-// else, no access
-
-
-
-
-// if (isset($_GET["pin"])){
-//     echo "HERE"
-//     // $query = "SELECT * from course where pin_code = {$_GET['pin']}";
-//     // $result = $mysqli->query($query)
-//     // if ($result){
-//     //     $has_pin_access = TRUE;
-//     // $result->free();
-// }
-
-// echo $is_lecturer;
-// echo $has_pin_access;
-
-// if (isset($_SESSION["username"])){
-//     $query = "SELECT * from user where username = {$_SESSION['username']}";
-//     if ($result = $mysqli->query($query)){
-//         while(($row = $result->fetch_assoc())){
-//             if ($row["user_role"] == "lecturer"){
-//                 $lecturer_course = 
-//                 $new_query = "select course_id from course where course_id = lecturer.course_course_id";
-//                 if ($new_result = $mysqli->query($new_query)){
-//                     $is_lecturer = TRUE; 
-//                     $new_result->free();
-//                 }
-//             }
-//         }
-//         $result->free();
-//     }
-
-// }
-
-
+if ($has_lecture_access == TRUE){
+    echo "<h1>Foreleser i dette emnet logget inn</h1>";
+}
 
 ?>
 <h2><a href=""></a></h2>
