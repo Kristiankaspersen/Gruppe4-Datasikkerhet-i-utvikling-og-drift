@@ -145,4 +145,20 @@ class Comment {
     }
 
 
+
+    /**
+     * Get the value of messageID
+     */ 
+    public function getMessageID()
+    {
+        return $this->messageID;
+    }
+
+    /**
+     * Get the value of commentText
+     */ 
+    public function getCommentText()
+    {
+        return $this->commentText;
+    }
 }

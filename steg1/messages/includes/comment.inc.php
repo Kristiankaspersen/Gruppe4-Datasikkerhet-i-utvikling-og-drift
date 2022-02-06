@@ -2,7 +2,7 @@
 
 session_start(); 
 
-if(isset($_POST["Submit"])) {
+if(isset($_POST["submit"])) {
 
     include "../../config/DatabaseConnection.php";
     include "../controller/CommentController.php"; 

@@ -69,7 +69,7 @@ class Message {
         $query = "INSERT INTO message(course_course_id, student_student_id, message_text) 
                   VALUES (?,?,?)  ";
         
-        $stmt = $this->conn->prepare($query);
+        $stmt = $this->conn->connect()->prepare($query);
 
         // Clean data: 
         $this->courseID = htmlspecialchars(strip_tags($this->courseID)); 
@@ -97,4 +97,36 @@ class Message {
     }
 
 
+
+    /**
+     * Get the value of courseID
+     */ 
+    public function getCourseID()
+    {
+        return $this->courseID;
+    }
+
+    /**
+     * Get the value of messageID
+     */ 
+    public function getMessageID()
+    {
+        return $this->messageID;
+    }
+
+    /**
+     * Get the value of studentID
+     */ 
+    public function getStudentID()
+    {
+        return $this->studentID;
+    }
+
+    /**
+     * Get the value of messageText
+     */ 
+    public function getMessageText()
+    {
+        return $this->messageText;
+    }
 }
