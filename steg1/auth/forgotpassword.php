@@ -36,7 +36,7 @@
         <div>
             <h4>Forgot password</h4>
             <p>If you forgot your password enter your email to recive a reset link!</p>
-            <form action="includes/reset-password.inc.php" method="post">
+            <form action="includes/reset-request.inc.php" method="post">
                 <input type="text" name="email" placeholder="Enter your E-mail">
                 <br>
                 <button type="submit" name="reset-request-submit">Send reset link</button> 
@@ -46,7 +46,7 @@
         <br>
         <div> 
             <h4>Login</h4> 
-            <form action="includes/reset-request.inc.php" method="post">
+            <form action="includes/login.inc.php" method="post">
                 <input type="text" name="usernameOrEmail" placeholder="Username or email">
                 <input type="password" name="password" placeholder="Password">
                 <br>

@@ -4,7 +4,7 @@ if (isset($_POST["reset-request-submit"])){
     $selector = bin2hex(random_bytes(8)); 
     $token = random_bytes(32);
 
-    $url = "158.39.188.204/steg1/auth/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex()$token;
+    $url = "steg1/auth/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex()$token;
 
     $expires = date("U") +1800;
 
@@ -21,7 +21,7 @@ if (isset($_POST["reset-request-submit"])){
         mysqli_stmt_bind_param($stmt, "s", $userEmail);
         mysqli_stmt_execute($stmt);
     }
-    $sql = "INSERT INTO pwdReset (pwdResetEmail, pwdResetSelector, pwdResetToken, pwdResetExpire) VALUES (?, ?, ?, ?);"; 
+    $sql = "INSERT INTO pwdReset (pwdResetEmail, pwdResetSelector, pwdResetToken, pwdResetExpire) VALUES (?, ?, ?, ?)"; 
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare)($stmt, $sqll){
         echo "There was an error";
@@ -38,7 +38,7 @@ if (isset($_POST["reset-request-submit"])){
     $to = $userEmail;
     $subject = 'Reset your password';
 
-    $message = '<p>Follow this link to reset your password, if you do not need to reset your password then ignore this email. </br> Here is your password link</>';
+    $message = '<p>Follow this link to reset your password, if you do not need to reset your password then ignore this email. </br> Here is your password link</p>';
     $message .= '<a href="'  . $url . '">' . $url . '<a/><p>';
 
     $headers = "From: Gruppefire <gruppefire@outlook.com>\r\n";
@@ -47,7 +47,7 @@ if (isset($_POST["reset-request-submit"])){
 
     mail($to,$subject, $message, $headers);
 
-    header("Location:../Forgotpassword.php?reset=succsess ");
+    header("Location:../forgotpassword.php?reset=succsess ");
 } else {
     header ("Location:http://158.39.188.204/steg1/auth/");
 }
