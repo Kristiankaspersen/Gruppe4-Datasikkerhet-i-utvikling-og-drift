@@ -29,7 +29,7 @@
             ?>
                 <li><a href="#">Sign up</a></li>
                 <li><a href="#">Login</a></li>
-                <li><a href="includes/Forgotpassword.php">Glemt passord?</a></li>
+                <li><a href="forgotpassword.php">Glemt passord?</a></li>
             <?php
                 }
             ?>

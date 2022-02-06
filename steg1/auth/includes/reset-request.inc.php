@@ -1,7 +1,7 @@
 <?php
 if (isset($_POST["reset-request-submit"])){
 
-    $selector = bin2hex(random_bytes(8))
+    $selector = bin2hex(random_bytes(8)); 
     $token = random_bytes(32);
 
     $url = "158.39.188.204/steg1/auth/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex()$token;
@@ -10,7 +10,7 @@ if (isset($_POST["reset-request-submit"])){
 
     $userEmail = $_POST["email"];
 
-    require 'DatabaseConnection.php'
+    require 'DatabaseConnection.php';
 
     $sql = "DELETE FROM pwdReset WHERE pwdResetEmail=?";
     $stmt = mysqli_stmt_init($conn);
@@ -35,7 +35,7 @@ if (isset($_POST["reset-request-submit"])){
     mysqli_stmt_close($stmt);
     mysqli_stmt_close();
 
-    $to = $userEmail
+    $to = $userEmail;
     $subject = 'Reset your password';
 
     $message = '<p>Follow this link to reset your password, if you do not need to reset your password then ignore this email. </br> Here is your password link</>';
