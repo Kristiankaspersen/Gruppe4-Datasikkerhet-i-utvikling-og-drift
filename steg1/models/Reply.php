@@ -81,4 +81,28 @@ public function delete() {
 }
 
 
+
+/**
+ * Get the value of messageID
+ */ 
+public function getMessageID()
+{
+return $this->messageID;
+}
+
+/**
+ * Get the value of lecturerID
+ */ 
+public function getLecturerID()
+{
+return $this->lecturerID;
+}
+
+/**
+ * Get the value of replyText
+ */ 
+public function getReplyText()
+{
+return $this->replyText;
+}
 }

@@ -2,7 +2,7 @@
 
 session_start(); 
 
-if(isset($_POST["Submit"])) {
+if(isset($_POST["submit"])) {
 
     include "../../config/DatabaseConnection.php";
     include "../controller/ReplyController.php"; 
@@ -19,7 +19,7 @@ if(isset($_POST["Submit"])) {
 
     $replyController = new ReplyController($reply); 
    
-    if($replyController->createMessage()) {
+    if($replyController->createReply()) {
         echo "Your reply has been submitted"; 
     } else {
         echo "Error in posting reply"; 

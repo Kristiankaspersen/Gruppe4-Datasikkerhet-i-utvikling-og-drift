@@ -17,8 +17,15 @@
 <h1>Fag</h1>
 
 <?php
+// windows: 
 // Change for server
-$servername = "localhost:3308";
+// $servername = "localhost:3308";
+// $username = "root";
+// $password = "root";
+// $dbName = "GruppeFireDB";
+
+// mac: 
+$servername = "localhost:8889";
 $username = "root";
 $password = "root";
 $dbName = "GruppeFireDB";
