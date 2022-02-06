@@ -25,7 +25,7 @@ class Message {
                 $this->construct5($args[0], $args[1], $args[2], $args[3], $args[4]);
             break; 
             default: 
-                trigger_error("Incorrect number of arguments for Student::__construct",  E_USER_WARNING);
+                trigger_error("Incorrect number of arguments for Message::__construct",  E_USER_WARNING);
         }
     }
 

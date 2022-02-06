@@ -28,7 +28,7 @@ $comment = new Comment(
 ); 
 
 // using setter here, because I could'nt use a construct, with these kinds of arguments. 
-$comment->getCommentText($data->comment_text); 
+$comment->setCommentText($data->comment_text); 
 
 // create post
 if($comment->update()) {

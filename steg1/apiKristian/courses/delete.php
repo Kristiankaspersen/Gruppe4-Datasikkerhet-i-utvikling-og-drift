@@ -3,8 +3,6 @@
 //
 // {
 //     "course_id": "ITM30618",
-//     "course_name": "new course",
-//     "pin_code": "4321"
 // }
 
 header('Access-Control-Allow-Origin: *'); 
@@ -31,9 +29,9 @@ $course = new Course(
 
 // create post
 if($course->delete()) {
-    echo json_encode( array('message' => 'Course updated')); 
+    echo json_encode( array('message' => 'Course deleted')); 
 } else {
 
-    echo json_encode( array('message' => 'Course Not updated'));
+    echo json_encode( array('message' => 'Course Not deleted'));
 
 }

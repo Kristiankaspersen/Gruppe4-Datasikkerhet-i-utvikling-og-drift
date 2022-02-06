@@ -18,19 +18,28 @@ class Course {
             case 1: 
                 $this->construct1($args[0]);
             break; 
+            case 2: 
+                $this->construct2($args[0], $args[1]);
+            break; 
             case 4: 
                 $this->construct4($args[0], $args[1], $args[2], $args[3]);
             break; 
             default: 
-                trigger_error("Incorrect number of arguments for Student::__construct",  E_USER_WARNING);
+                trigger_error("Incorrect number of arguments for Course::__construct",  E_USER_WARNING);
         }
     }
+
+    private function construct0() {} 
 
     private function construct1($db) {
         $this->conn = $db; 
     }
+    private function construct2($db, $courseID) {
+        $this->conn = $db; 
+        $this->courseID = $courseID; 
+    }
 
-    private function construct0() {} 
+  
     
     private function construct4($db, $courseID, $courseName, $pinCode) {
         $this->conn = $db;
@@ -104,7 +113,7 @@ class Course {
 
     function delete() {
 
-        $query = "DELETE FROM course WHERE course_id = :id"; 
+        $query = "DELETE FROM course WHERE course_id = :course_id"; 
 
         // Prepare statement 
         $stmt = $this->conn->prepare($query); 
@@ -113,7 +122,7 @@ class Course {
         $this->courseID = htmlspecialchars(strip_tags($this->courseID)); 
 
         // Bind data
-        $stmt->bindParam(':id', $this->courseID);
+        $stmt->bindParam(":course_id", $this->courseID);
         
         // Execute query 
         if($stmt->execute()) {
@@ -122,6 +131,7 @@ class Course {
 
         // Print error if something goes wrong
         printf("Error: %s. \n", $stmt->error); 
+        printf("You have to update the lecturers course, before you can delete"); 
 
         return false; 
 

@@ -22,7 +22,7 @@ function __construct() {
             $this->construct4($args[0], $args[1], $args[2], $args[3]);
         break;
         default: 
-            trigger_error("Incorrect number of arguments for Student::__construct",  E_USER_WARNING);
+            trigger_error("Incorrect number of arguments for Reply::__construct",  E_USER_WARNING);
     }
 }
 

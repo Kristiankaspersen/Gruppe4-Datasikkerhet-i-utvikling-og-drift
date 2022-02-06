@@ -4,7 +4,7 @@ class Comment {
 
 
     private $conn; 
-    private $commentID; //Do a autoincrement from the db here. 
+    private $commentID; 
     private $messageID;
     private $commentText;  
 
@@ -28,7 +28,7 @@ class Comment {
                 $this->construct4($args[0], $args[1], $args[2], $args[3]);
             break;
             default: 
-                trigger_error("Incorrect number of arguments for Student::__construct",  E_USER_WARNING);
+                trigger_error("Incorrect number of arguments for Comment::__construct",  E_USER_WARNING);
         }
     }
 
@@ -140,7 +140,7 @@ class Comment {
 
     //setter: 
 
-    public function getCommentText($commentText) {
+    public function setCommentText($commentText) {
         $this->commentText = $commentText; 
     }
 

@@ -13,7 +13,7 @@
 
         <p> comments, courses, lecturers, messages, replies, og students.  </p>
 
-        <p>Hvordan man skriver, leser oppdaterer og sletter, gjøres slik: </p>
+        <p>Hvordan man skriver, leser oppdaterer og sletter, gjøres slik i disse lenkene: </p>
 
         <ul>
            <li>api/&lt;hvor man vil sende data til&gt;/create.php</li>
@@ -110,6 +110,17 @@
             </pre>
         </figure>
          <h4>delete sample data:</h4>
+         <p>Om faget er knyttet til en lærer må du oppdatere faget læreren underviser i før man kan slette faget</p>
+        <figure>
+            <figcaption> course/delete.php </figcaption> 
+            <pre class="codechunk">
+                <code class="code"> 
+        {
+            "course_id": "ITM30618"
+        }
+                </code>
+            </pre>
+        </figure>
 
          <h3>lecturers</h3>
 
@@ -166,8 +177,6 @@
          <h4>read sample data:</h4>
          <h4>update sample data:</h4>
          <h4>delete sample data:</h4>
-
-
 
     </body>
 </html>
