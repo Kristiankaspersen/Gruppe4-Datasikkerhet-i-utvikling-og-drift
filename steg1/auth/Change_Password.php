@@ -1,55 +1,50 @@
 <?php 
 session_start();
 
-if (isset($_SESSION['student_id']) || isset($_SESSION["lecture_id"]) && isset($_SESSION['username'])) 
+$user = $_SESSION['username'];
+
+if ($user)
 {
+  if ($_POST['submit'])
+  {
+    $op = ($_POST['op']);
+    $np = ($_POST['np']);
+    $rp = ($_POST['rp']);
 
- ?>
-<!DOCTYPE html>
-<html>
-<head>
+    $hashnp = password_hash($np, PASSWORD_DEFAULT); 
+    $connect = mysqli_connect("localhost", "root", "", "GruppeFireDB") or die();
+    $queryget = mysqli_query($connect, "SELECT password FROM user WHERE username = '$user'") or die("Not worky");
+    $row = mysqli_fetch_assoc($queryget);
+    $opdb = $row['password'];
+    $faktisk_passord = password_hash($opdb, PASSWORD_DEFAULT);
+    $checked_pwd = (password_verify($opdb , $faktisk_passord));
 
-    <title> Change Password</title>
 
-</head>
-<body>
-    <h2 align="center"> Change Password</h2>
-    <?php if (isset($_GET['error'])) { ?>
-     		<p class="error"><?php echo $_GET['error']; ?></p>
-     	<?php } ?>
+    if ($checked_pwd = true)
+    {
+      
+      if ($np = $rp)
+      {
+        $sql = "UPDATE user SET password = '$hashnp' WHERE username = '$user' ";
+        mysqli_query($connect, $sql);
+      die("Your password has been changed!");
+      }
+      else 
+        die("Passwords must match");
+    }
+    else 
+      die("Old password doesnt match!");
 
-     	<?php if (isset($_GET['success'])) { ?>
-            <p class="success"><?php echo $_GET['success']; ?></p>
-        <?php } ?>
-<form method="post" action="C_Password.php" align="center">
-Current Password:<br>
-<input type="password" 
-name="op">
-<span id="op"></span>
-<br>
-
-New Password:<br>
-<input type="password" 
-name="np">
-<span id="np" ></span>
-<br>
-
-Confirm Password:<br>
-<input type="password" 
-name="c_np">
-<span id="c_np" ></span>
-<br><br>
-<input type="submit">
-<br>
-<a href="index.php" class="ca">HOME</a>
-</form>
-
-</body>
-
-</html>
-<?php 
-}else{
-     header("Location: index.php");
-     exit();
+  }
+  echo"
+    <form action='Change_Password.php' method='POST'>
+        Old password: <input type='text' name='op'> <p>
+        New password: <input type='password' name='np'> <br>
+        Repeat new password: <input type='password' name='rp'> <p>
+        <input type='submit' name='submit' value='Change_password'>
+        </form>
+";
 }
- ?>
+else
+  die("Log in.")
+?>
