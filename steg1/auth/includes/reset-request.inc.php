@@ -4,27 +4,32 @@ if (isset($_POST["reset-request-submit"])){
     $selector = bin2hex(random_bytes(8)); 
     $token = random_bytes(32);
 
-    $url = "/auth/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex()$token;
+    $url = "/auth/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
-    $expires = date("U") +1800;
+    $expires = date("U") + 1800;
+
+    
+
+    require '../../config\DatabaseConnection.php';
 
     $userEmail = $_POST["email"];
 
-    require 'DatabaseConnection.php';
-
     $sql = "DELETE FROM pwdReset WHERE pwdResetEmail=?;";
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare)($stmt, $sql){
+    $stmt = mysqli_stmt_init($databaseConnection);
+
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
         echo "There was an error";
         exit();
-    }else {
+    } else {
         mysqli_stmt_bind_param($stmt, "s", $userEmail);
         mysqli_stmt_execute($stmt);
-        header("Location: ../http://158.39.188.204/steg1/auth/")
+        header("Location: ../steg1/auth/");
     }
-    $sql = "INSERT INTO pwdReset (pwdResetEmail, pwdResetSelector, pwdResetToken, pwdResetExpire) VALUES (?, ?, ?, ?)"; 
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare)($stmt, $sqll){
+
+    $sql = "INSERT INTO pwdReset (pwdResetEmail, pwdResetSelector, pwdResetToken, pwdResetExpire) VALUES (?, ?, ?, ?);"; 
+    $stmt = mysqli_stmt_init($databaseConnection);
+
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
         echo "There was an error";
         exit();
     }else {
@@ -46,7 +51,7 @@ if (isset($_POST["reset-request-submit"])){
     $headers .= "Reply-To: gruppefire@outlook.com\r\n";
     $headers .= "Content-type: text/html\r\n";
 
-    mail($to,$subject, $message, $headers);
+    mail($to, $subject, $message, $headers);
 
     header("Location:../forgotpassword.php?reset=succsess ");
 } else {
