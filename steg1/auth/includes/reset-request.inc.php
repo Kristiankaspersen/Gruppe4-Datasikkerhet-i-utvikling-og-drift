@@ -38,7 +38,8 @@ if (isset($_POST["reset-request-submit"])){
     }
 
     mysqli_stmt_close($stmt);
-
+    ini_set('SMTP' , 'smpt-mail.outlook.com');
+    ini_set('smtp_port' , '587');
 
     $to = "katrinehoyem@hotmail.com";
     $subject = 'Reset your password';
@@ -46,14 +47,15 @@ if (isset($_POST["reset-request-submit"])){
     $message = '<p>Follow this link to reset your password, if you do not need to reset your password then ignore this email. </br> Here is your password link</p>';
     $message .= '<a href="'  . $url . '">' . $url . '<a/></p>';
 
-    $headers = "From: gruppefire <gruppefire@outlook.com>\r\n";
+    $headers = "From: gruppefire@outlook.com \r\n";
     $headers .= "Reply-To: gruppefire@outlook.com\r\n";
     $headers .= "Content-type: text/html\r\n";
     $headers .= "X-Mailer: PHP/" . phpversion();
 
-    mail($to, $subject, $message, $headers);
+    $res = mail($to, $subject, $message, $headers);
+    echo "resultat av mail(): " . $res;
 
-    header("Location: ../forgotpassword.php?reset=succsess ");
+   # header("Location: ../forgotpassword.php?reset=succsess ");
 } else {
     header ("Location: ../index.php");
 }
