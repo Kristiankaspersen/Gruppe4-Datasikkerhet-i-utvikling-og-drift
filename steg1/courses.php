@@ -8,6 +8,7 @@
     <title>Steg1-Gruppe4</title>
 </head>
 <body>
+<h2><a href="../steg1/index.php">Gå tilbake</a></h2>
 
 <h1>Skriv inn pin kode for ønsket fag</h1>
 <form action="course.php" method="post">
@@ -17,20 +18,8 @@
 <h1>Fag</h1>
 
 <?php
-// windows: 
-// Change for server
-// $servername = "localhost:3308";
-// $username = "root";
-// $password = "root";
-// $dbName = "GruppeFireDB";
 
-// mac: 
-$servername = "localhost:8889";
-$username = "root";
-$password = "root";
-$dbName = "GruppeFireDB";
-
-$mysqli = new mysqli($servername, $username, $password, $dbName); 
+include "config/mysqliConn.php"; 
 $query = "SELECT course_id, course_name FROM course";
 
 echo "

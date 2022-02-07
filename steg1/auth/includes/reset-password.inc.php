@@ -16,7 +16,7 @@ if (isset($_POST["reset-password-submit"])) {
 
     $currentDate = date("U");
 
-    require 'DatabaseConnection.php'
+    require '../../config\sqliDbConn.php';
 
 
     $sql = "SELECT * FROM pwdReset WHERE pwdResetSelector=? AND pwdResetExpires >= ?";
@@ -75,7 +75,7 @@ if (isset($_POST["reset-password-submit"])) {
                     }else {
                     mysqli_stmt_bind_param($stmt, "s", $userEmail);
                     mysqli_stmt_execute($stmt);
-                    header("Location: ../http://158.39.188.204/steg1/auth/")
+                    header("Location: ../steg1\auth\forgotpassword.php");
                 }
 
                 }

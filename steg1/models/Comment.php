@@ -68,7 +68,7 @@ class Comment {
         $query = "INSERT INTO comment(message_message_id, comment_text) 
                   VALUES (?,?)  ";
         
-        $stmt = $this->conn->prepare($query);
+        $stmt = $this->conn->connect()->prepare($query);
 
         // Clean data: 
         $this->messageID = htmlspecialchars(strip_tags($this->messageID)); 

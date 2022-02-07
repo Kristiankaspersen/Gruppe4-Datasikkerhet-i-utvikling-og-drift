@@ -11,20 +11,9 @@
     <title>Steg1-Gruppe4</title>
 </head>
 <body>
+<h2><a href="../steg1/index.php">Gå tilbake</a></h2>
 <?php
-// TODO: Change for server
-// $servername = "localhost:3308";
-// $username = "root";
-// $password = "root";
-// $dbName = "GruppeFireDB";
-
-// mac: 
-$servername = "localhost:8889";
-$username = "root";
-$password = "root";
-$dbName = "GruppeFireDB";
-
-$mysqli = new mysqli($servername, $username, $password, $dbName);
+include "config/mysqliConn.php";
 
 $has_pin_access = FALSE;
 $has_lecture_access = FALSE;
@@ -75,33 +64,76 @@ else if (isset($_SESSION["username"])){
 }
 
 if ($has_lecture_access == TRUE){
-    $query = "select message_id, message_text from message where course_course_id = '{$course_id}'";
-    echo "<h1>Meldinger</h1>";
-    if ($result = $mysqli->query($query)){
-        while(($row = $result->fetch_assoc())){
-            // TODO: href to correct page
-            echo "<div><a href='#'><h3>Id: {$row['message_id']}</h3> <p>{$row['message_text']}</p></a></div>";
-        }    
-        $result->free();    
-    }
-}
-else if ($has_pin_access == TRUE){
-    $query = "select message_id, message_text from message where course_course_id = '{$course_id}'";
-    echo "<h1>Meldinger</h1>";
-    if ($result = $mysqli->query($query)){
-        while(($row = $result->fetch_assoc())){
-            // TODO: href to correct page
-            echo "<div><a href='#'><h3>Id: {$row['message_id']}</h3> <p>{$row['message_text']}</p></a></div>";
-        }    
-        $result->free();    
-    }
+    header("Location: messages/reply-message.php");
+    exit();
 }
 else if ($has_student_access == TRUE){
-    // TODO: redirect to page for sending message
-    echo "<h1> STUDENT </h1>";
-    // uncomment to redirect
-    // header("Location: #");
-    // exit();
+    header("Location: messages/student-message.php");
+    exit();
+}
+else if ($has_pin_access == TRUE){
+    // display image here
+    $image_query = "select * from lecturer where course_course_id = '{$course_id}'";
+    if ($image_res = $mysqli->query($image_query)){
+        while (($image_row = $image_res->fetch_assoc())){
+            extract($image_row);
+            echo "<img src='uploads/" .$profilepicture. "' width='500px'>";
+        }
+        $image_res->free(); 
+    } 
+
+    $query = "select message_id, message_text from message where course_course_id = '{$course_id}'";
+    echo "<h1>Meldinger i {$course_id}</h1>";
+    if ($result = $mysqli->query($query)){
+        $all_id_for_messages = array(); 
+        $i = 0; 
+        while(($row = $result->fetch_assoc())){
+            $all_id_for_messages[$i] = '<option value="'. $row["message_id"] . '">'.$row["message_id"].'</option>';
+            $i++; 
+            echo "<h2>Id: {$row['message_id']}</h3> <p>{$row['message_text']}</p>";
+
+            $new_query = "SELECT * FROM `reply` where message_message_id = '{$row['message_id']}'"; 
+            if ($newresult = $mysqli->query($new_query)){
+                echo "<h3> Svar : </h3>"; 
+                while(($newrow = $newresult->fetch_assoc())){
+                    echo "<p>{$newrow['reply_text']}";
+                }
+                $newresult->free(); 
+            }
+
+            $commentquery = "SELECT * FROM `comment` WHERE message_message_id = '{$row['message_id']}'"; 
+            if ($commentresult = $mysqli->query($commentquery)){
+                echo "<h3> Kommentarer : </h3>"; 
+                while(($commentrow = $commentresult->fetch_assoc())){
+                    echo "<p>{$commentrow['comment_text']}";
+                }
+                $commentresult->free(); 
+            }
+
+        }
+        $result->free();
+    }
+
+    ?>
+                            <div class="reply-box">
+                        <form action="messages/includes/comment.inc.php" method="post">
+                            <label for="courses">Send comment to message id:</label>
+                            <select id="course" name="comment_id">
+                                <?php
+                                foreach ($all_id_for_messages as $id)  {
+                                    echo $id ."<br />";
+                                }
+                                ?>
+                            </select>
+                            <br>
+                            <textarea id="comment-txt" name="comment_text" rows="10" cols="50">
+                            </textarea>
+                            <br>
+                            <button class="btn" type="submit" name="submit">Send reply</button> 
+                        </form>
+                     </div>  
+
+    <?php 
 }
 else {
     echo "<h1>Du har ikke tilgang til dette emnet, <a href='courses.php'>Gå tilbake</a></h1>";

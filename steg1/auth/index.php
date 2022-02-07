@@ -11,7 +11,7 @@
     <title>Signup</title>
 </head>
 <body>
-
+<h2><a href="../">Gå tilbake</a></h2>
     <nav>
         <ul>
             <?php 
