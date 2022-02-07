@@ -13,16 +13,17 @@
 <body>
 <?php
 // TODO: Change for server
-// $servername = "localhost:3308";
+$servername = "localhost:3308";
+$username = "root";
+$password = "root";
+$dbName = "GruppeFireDB";
+
+// mac: 
+// $servername = "localhost:8889";
 // $username = "root";
 // $password = "root";
 // $dbName = "GruppeFireDB";
 
-// mac: 
-$servername = "localhost:8889";
-$username = "root";
-$password = "root";
-$dbName = "GruppeFireDB";
 
 $mysqli = new mysqli($servername, $username, $password, $dbName);
 
@@ -75,33 +76,31 @@ else if (isset($_SESSION["username"])){
 }
 
 if ($has_lecture_access == TRUE){
-    $query = "select message_id, message_text from message where course_course_id = '{$course_id}'";
-    echo "<h1>Meldinger</h1>";
-    if ($result = $mysqli->query($query)){
-        while(($row = $result->fetch_assoc())){
-            // TODO: href to correct page
-            echo "<div><a href='#'><h3>Id: {$row['message_id']}</h3> <p>{$row['message_text']}</p></a></div>";
-        }    
-        $result->free();    
-    }
+    header("Location: messages/reply-message.php");
+    exit();
+}
+else if ($has_student_access == TRUE){
+    header("Location: messages/student-message.php");
+    exit();
 }
 else if ($has_pin_access == TRUE){
     $query = "select message_id, message_text from message where course_course_id = '{$course_id}'";
-    echo "<h1>Meldinger</h1>";
+    echo "<h1>Meldinger i {$course_id}</h1>";
     if ($result = $mysqli->query($query)){
         while(($row = $result->fetch_assoc())){
             // TODO: href to correct page
-            echo "<div><a href='#'><h3>Id: {$row['message_id']}</h3> <p>{$row['message_text']}</p></a></div>";
-        }    
-        $result->free();    
+            echo "<h2>Id: {$row['message_id']}</h3> <p>{$row['message_text']}</p>";
+            $new_query = "SELECT * FROM `reply` where message_message_id = '{$row['message_id']}'"; 
+            echo "<h3> Svar : </h3>"; 
+            if ($newresult = $mysqli->query($new_query)){
+                while(($newrow = $newresult->fetch_assoc())){
+                    echo "<p>{$newrow['reply_text']}";
+                }
+                $newresult->free(); 
+            }
+        }
+        $result->free();
     }
-}
-else if ($has_student_access == TRUE){
-    // TODO: redirect to page for sending message
-    echo "<h1> STUDENT </h1>";
-    // uncomment to redirect
-    // header("Location: #");
-    // exit();
 }
 else {
     echo "<h1>Du har ikke tilgang til dette emnet, <a href='courses.php'>Gå tilbake</a></h1>";
