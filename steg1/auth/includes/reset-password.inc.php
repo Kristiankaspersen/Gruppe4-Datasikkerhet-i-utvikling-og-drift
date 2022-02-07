@@ -16,11 +16,11 @@ if (isset($_POST["reset-password-submit"])) {
 
     $currentDate = date("U");
 
-    require '../../config\DatabaseConnection.php';
+    require '../../config\sqliDbConn.php';
 
 
     $sql = "SELECT * FROM pwdReset WHERE pwdResetSelector=? AND pwdResetExpires >= ?";
-    $stmt = mysqli_stmt_init($databaseConnection);
+    $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare)($stmt, $sql){
         echo "There was an error";
         exit();
@@ -43,7 +43,7 @@ if (isset($_POST["reset-password-submit"])) {
             $tokenEmail = $row ['pwdResetEmail'];
 
             $sql = "SELECT * FROM user WHERE email=?;";
-            $stmt = mysqli_stmt_init($databaseConnection);
+            $stmt = mysqli_stmt_init($conn);
             if (!mysqli_stmt_prepare)($stmt, $sql){
                 echo "There was an error";
                 exit();
@@ -57,7 +57,7 @@ if (isset($_POST["reset-password-submit"])) {
                 } else {
                 
                 $sql = "UPDATE user SET password=? WHERE email=?";
-                $stmt = mysqli_stmt_init($databaseConnection);
+                $stmt = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($stmt, $sql)) {
                     echo "There was an error!";
                     exit();
@@ -68,14 +68,14 @@ if (isset($_POST["reset-password-submit"])) {
                     mysqli_stmt_execute($stmt);
 
                     $sql "DELETE FROM pwdReset WHERE pwdResetEmail=?";
-                    $stmt = mysqli_stmt_init($databaseConnection);
+                    $stmt = mysqli_stmt_init($conn);
                     if (!mysqli_stmt_prepare)($stmt, $sql){
                         echo "There was an error";
                         exit();
                     }else {
                     mysqli_stmt_bind_param($stmt, "s", $userEmail);
                     mysqli_stmt_execute($stmt);
-                    header("Location: ../http://158.39.188.204/steg1/auth/")
+                    header("Location: ../steg1\auth\forgotpassword.php");
                 }
 
                 }
