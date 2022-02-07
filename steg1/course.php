@@ -12,20 +12,7 @@
 </head>
 <body>
 <?php
-// TODO: Change for server
-// $servername = "localhost:3308";
-// $username = "root";
-// $password = "root";
-// $dbName = "GruppeFireDB";
-
-// mac: 
-$servername = "localhost:8889";
-$username = "root";
-$password = "root";
-$dbName = "GruppeFireDB";
-
-
-$mysqli = new mysqli($servername, $username, $password, $dbName);
+include "config/mysqliConn.php";
 
 $has_pin_access = FALSE;
 $has_lecture_access = FALSE;
@@ -90,19 +77,28 @@ else if ($has_pin_access == TRUE){
         $all_id_for_messages = array(); 
         $i = 0; 
         while(($row = $result->fetch_assoc())){
-            // TODO: href to correct page
-
             $all_id_for_messages[$i] = '<option value="'. $row["message_id"] . '">'.$row["message_id"].'</option>';
             $i++; 
             echo "<h2>Id: {$row['message_id']}</h3> <p>{$row['message_text']}</p>";
+
             $new_query = "SELECT * FROM `reply` where message_message_id = '{$row['message_id']}'"; 
-            echo "<h3> Svar : </h3>"; 
             if ($newresult = $mysqli->query($new_query)){
+                echo "<h3> Svar : </h3>"; 
                 while(($newrow = $newresult->fetch_assoc())){
                     echo "<p>{$newrow['reply_text']}";
                 }
                 $newresult->free(); 
             }
+
+            $commentquery = "SELECT * FROM `comment` WHERE message_message_id = '{$row['message_id']}'"; 
+            if ($commentresult = $mysqli->query($commentquery)){
+                echo "<h3> Kommentarer : </h3>"; 
+                while(($commentrow = $commentresult->fetch_assoc())){
+                    echo "<p>{$commentrow['comment_text']}";
+                }
+                $commentresult->free(); 
+            }
+
         }
         $result->free();
     }
