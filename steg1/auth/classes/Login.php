@@ -57,7 +57,7 @@ class Login extends DatabaseConnection {
                 // Then getting information from lecturer table: 
                 $lecturerStmt = $this->connect()->prepare('SELECT * FROM lecturer WHERE lecturer_id = ?;');
 
-                $lecturerStmt->execute(array($user[0]["lecturer_lecturer_id"]));
+                $lecturerStmt->execute(array($lecturer_has_user[0]["lecturer_lecturer_id"]));
 
                 $lecturer = $lecturerStmt->fetchAll(PDO::FETCH_ASSOC);
 

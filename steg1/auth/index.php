@@ -31,6 +31,9 @@
             ?>
                 <li><a href="#"><?php echo $_SESSION["username"]; ?></a></li>
                 <li><a href="#"><?php echo $_SESSION["lecturer_id"]; ?></a></li>
+                <li><a href="#"><?php echo $_SESSION["course_id"]; ?></a></li>
+                <li><a href="#"><?php echo $_SESSION["profilepicture"]; ?></a></li>
+                <li><a href="../messages/reply-message.php">Send message</a></li>
                 <li><a href="classes/Change_Password.php">Change Password</a></li>
                 <li><a href="includes/logout.inc.php">Logout</a></li>
                 

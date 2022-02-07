@@ -5,8 +5,8 @@ session_start();
 if(isset($_POST["submit"])) {
 
     include "../../config/DatabaseConnection.php";
-    include "../controller/ReplyController.php"; 
     include "../../models/Reply.php";
+    include "../controller/ReplyController.php"; 
 
     $db = new DatabaseConnection();
 

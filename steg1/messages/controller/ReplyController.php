@@ -1,6 +1,6 @@
 <?php
 
-class Reply  { 
+class ReplyController  { 
     private $reply; 
    
     public function __construct($reply)
@@ -15,7 +15,13 @@ class Reply  {
             exit(); 
         }
         
-        $this->reply->create(); 
+        if($this->reply->create()) {
+            header("location: ../student-message.php?error=YourPostHasBeenSubmitted"); 
+            echo "Your reply has been submitted"; 
+        } else {
+            header("location: ../index.php?error=TheMessageDidNotGetCraeted"); 
+            echo "Error in posting reply, try again"; 
+        }
     }
  
     // All validations for the same data for user being checked. 

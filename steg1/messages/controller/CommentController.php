@@ -1,6 +1,6 @@
 <?php
 
-class MessageController { 
+class CommentController { 
     private $comment; 
    
     public function __construct($comment)
