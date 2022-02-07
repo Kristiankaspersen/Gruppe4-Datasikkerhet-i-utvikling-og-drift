@@ -8,6 +8,7 @@
     <title>Steg1-Gruppe4</title>
 </head>
 <body>
+<h2><a href="../steg1/index.php">Gå tilbake</a></h2>
 
 <h1>Skriv inn pin kode for ønsket fag</h1>
 <form action="course.php" method="post">

@@ -11,6 +11,7 @@
     <title>Steg1-Gruppe4</title>
 </head>
 <body>
+<h2><a href="../steg1/index.php">Gå tilbake</a></h2>
 <?php
 include "config/mysqliConn.php";
 
@@ -71,6 +72,16 @@ else if ($has_student_access == TRUE){
     exit();
 }
 else if ($has_pin_access == TRUE){
+    // display image here
+    $image_query = "select * from lecturer where course_course_id = '{$course_id}'";
+    if ($image_res = $mysqli->query($image_query)){
+        while (($image_row = $image_res->fetch_assoc())){
+            extract($image_row);
+            echo "<img src='uploads/" .$profilepicture. "' width='500px'>";
+        }
+        $image_res->free(); 
+    } 
+
     $query = "select message_id, message_text from message where course_course_id = '{$course_id}'";
     echo "<h1>Meldinger i {$course_id}</h1>";
     if ($result = $mysqli->query($query)){
