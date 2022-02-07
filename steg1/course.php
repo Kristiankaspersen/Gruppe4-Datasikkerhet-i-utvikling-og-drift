@@ -79,6 +79,10 @@ if ($has_lecture_access == TRUE){
     header("Location: messages/reply-message.php");
     exit();
 }
+else if ($has_student_access == TRUE){
+    header("Location: messages/student-message.php");
+    exit();
+}
 else if ($has_pin_access == TRUE){
     $query = "select message_id, message_text from message where course_course_id = '{$course_id}'";
     echo "<h1>Meldinger i {$course_id}</h1>";
@@ -97,10 +101,6 @@ else if ($has_pin_access == TRUE){
         }
         $result->free();
     }
-}
-else if ($has_student_access == TRUE){
-    header("Location: messages/student-message.php");
-    exit();
 }
 else {
     echo "<h1>Du har ikke tilgang til dette emnet, <a href='courses.php'>Gå tilbake</a></h1>";
