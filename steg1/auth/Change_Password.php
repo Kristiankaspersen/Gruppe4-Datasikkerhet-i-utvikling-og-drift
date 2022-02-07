@@ -7,12 +7,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {}
 <html>
 <head>
 
-    <title> Bytt passord</title>
+    <title> Change Password</title>
 
 </head>
 <body>
     <h2 align="center"> Change Password</h2>
-    <?php if(isset($message)) {echo $message;} ?> 
+  <div>  <?php if(isset($message)) {echo $message;} ?> </div>
 <form method="post" action="classes/C-Password.php" align="center">
 Current Password:<br>
 <input type="password" 
