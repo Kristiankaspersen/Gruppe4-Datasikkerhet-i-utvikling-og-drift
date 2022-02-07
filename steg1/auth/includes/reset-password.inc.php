@@ -16,11 +16,11 @@ if (isset($_POST["reset-password-submit"])) {
 
     $currentDate = date("U");
 
-    require 'DatabaseConnection.php'
+    require '../../config\DatabaseConnection.php';
 
 
     $sql = "SELECT * FROM pwdReset WHERE pwdResetSelector=? AND pwdResetExpires >= ?";
-    $stmt = mysqli_stmt_init($conn);
+    $stmt = mysqli_stmt_init($databaseConnection);
     if (!mysqli_stmt_prepare)($stmt, $sql){
         echo "There was an error";
         exit();
@@ -43,7 +43,7 @@ if (isset($_POST["reset-password-submit"])) {
             $tokenEmail = $row ['pwdResetEmail'];
 
             $sql = "SELECT * FROM user WHERE email=?;";
-            $stmt = mysqli_stmt_init($conn);
+            $stmt = mysqli_stmt_init($databaseConnection);
             if (!mysqli_stmt_prepare)($stmt, $sql){
                 echo "There was an error";
                 exit();
@@ -57,7 +57,7 @@ if (isset($_POST["reset-password-submit"])) {
                 } else {
                 
                 $sql = "UPDATE user SET password=? WHERE email=?";
-                $stmt = mysqli_stmt_init($conn);
+                $stmt = mysqli_stmt_init($databaseConnection);
                 if (!mysqli_stmt_prepare($stmt, $sql)) {
                     echo "There was an error!";
                     exit();
@@ -68,7 +68,7 @@ if (isset($_POST["reset-password-submit"])) {
                     mysqli_stmt_execute($stmt);
 
                     $sql "DELETE FROM pwdReset WHERE pwdResetEmail=?";
-                    $stmt = mysqli_stmt_init($conn);
+                    $stmt = mysqli_stmt_init($databaseConnection);
                     if (!mysqli_stmt_prepare)($stmt, $sql){
                         echo "There was an error";
                         exit();

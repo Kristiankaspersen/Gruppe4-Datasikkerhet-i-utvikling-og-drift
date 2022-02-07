@@ -12,16 +12,14 @@ if(isset($_POST["submit"])) {
 
     $comment = new Comment(
         $db,
-        $_POST["message_id"],
-        $_POST["message_text"]
+        $_POST["comment_id"],
+        $_POST["comment_text"]
     ); 
 
-    $messageController = new CommentController($comment); 
+    $commentController = new CommentController($comment); 
 
-    if($messageController->createComment()) {
-        echo "Your post has been submitted"; 
-    } else {
-        echo "Error in posting comment"; 
-    }
+    $commentController->createComment(); 
+
+    header("Location: ../../courses.php"); 
 
 }
