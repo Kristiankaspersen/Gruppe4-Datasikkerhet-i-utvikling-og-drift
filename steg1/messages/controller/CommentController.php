@@ -15,7 +15,11 @@ class CommentController {
             exit(); 
         }
         
-        $this->comment->create(); 
+        if($this->comment->create()) {
+            echo "Your post has been submitted"; 
+        } else {
+            echo "Error in posting comment"; 
+        }
     }
  
     // All validations for the same data for user being checked. 

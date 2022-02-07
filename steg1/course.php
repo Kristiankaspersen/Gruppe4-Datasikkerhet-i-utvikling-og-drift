@@ -13,16 +13,16 @@
 <body>
 <?php
 // TODO: Change for server
-$servername = "localhost:3308";
-$username = "root";
-$password = "root";
-$dbName = "GruppeFireDB";
-
-// mac: 
-// $servername = "localhost:8889";
+// $servername = "localhost:3308";
 // $username = "root";
 // $password = "root";
 // $dbName = "GruppeFireDB";
+
+// mac: 
+$servername = "localhost:8889";
+$username = "root";
+$password = "root";
+$dbName = "GruppeFireDB";
 
 
 $mysqli = new mysqli($servername, $username, $password, $dbName);
@@ -87,8 +87,13 @@ else if ($has_pin_access == TRUE){
     $query = "select message_id, message_text from message where course_course_id = '{$course_id}'";
     echo "<h1>Meldinger i {$course_id}</h1>";
     if ($result = $mysqli->query($query)){
+        $all_id_for_messages = array(); 
+        $i = 0; 
         while(($row = $result->fetch_assoc())){
             // TODO: href to correct page
+
+            $all_id_for_messages[$i] = '<option value="'. $row["message_id"] . '">'.$row["message_id"].'</option>';
+            $i++; 
             echo "<h2>Id: {$row['message_id']}</h3> <p>{$row['message_text']}</p>";
             $new_query = "SELECT * FROM `reply` where message_message_id = '{$row['message_id']}'"; 
             echo "<h3> Svar : </h3>"; 
@@ -101,6 +106,27 @@ else if ($has_pin_access == TRUE){
         }
         $result->free();
     }
+
+    ?>
+                            <div class="reply-box">
+                        <form action="messages/includes/comment.inc.php" method="post">
+                            <label for="courses">Send comment to message id:</label>
+                            <select id="course" name="comment_id">
+                                <?php
+                                foreach ($all_id_for_messages as $id)  {
+                                    echo $id ."<br />";
+                                }
+                                ?>
+                            </select>
+                            <br>
+                            <textarea id="comment-txt" name="comment_text" rows="10" cols="50">
+                            </textarea>
+                            <br>
+                            <button class="btn" type="submit" name="submit">Send reply</button> 
+                        </form>
+                     </div>  
+
+    <?php 
 }
 else {
     echo "<h1>Du har ikke tilgang til dette emnet, <a href='courses.php'>Gå tilbake</a></h1>";

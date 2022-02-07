@@ -84,7 +84,13 @@
                 // Can just change the box underneath to point to comment.inc.php, and it will be the same solution
             }
             ?>
-                    <div class="reply-box">
+
+            <?php 
+                if(empty($all_id_for_messages)) {
+                    echo "There is nothing to reply on"; 
+                } else {
+                    ?>
+                        <div class="reply-box">
                         <form action="includes/reply.inc.php" method="post">
                             <label for="courses">Send reply to message id:</label>
                             <select id="course" name="message_id">
@@ -102,6 +108,12 @@
                             <button class="btn" type="submit" name="submit">Send reply</button> 
                         </form>
                      </div>  
+
+
+                    <?php
+                }
+            ?>
+    
                      <?php
         } else {
             echo "There are no messages in the course"; 
