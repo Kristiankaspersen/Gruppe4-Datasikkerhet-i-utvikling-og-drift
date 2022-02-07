@@ -4,7 +4,7 @@ if (isset($_POST["reset-request-submit"])){
     $selector = bin2hex(random_bytes(8)); 
     $token = random_bytes(32);
 
-    $url = "steg1/auth/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex()$token;
+    $url = "/auth/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex()$token;
 
     $expires = date("U") +1800;
 
@@ -20,6 +20,7 @@ if (isset($_POST["reset-request-submit"])){
     }else {
         mysqli_stmt_bind_param($stmt, "s", $userEmail);
         mysqli_stmt_execute($stmt);
+        header("Location: ../http://158.39.188.204/steg1/auth/")
     }
     $sql = "INSERT INTO pwdReset (pwdResetEmail, pwdResetSelector, pwdResetToken, pwdResetExpire) VALUES (?, ?, ?, ?)"; 
     $stmt = mysqli_stmt_init($conn);
