@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.css" />
-    <title>Document</title>
+    <title>messages</title>
 </head>
 <body>
 
@@ -43,94 +43,52 @@
 
                 $num = $stmt->rowCount(); 
 
-                echo "{$num} <br>"; 
-
-                if($num > 0) {
+                if($num > 0) 
+                {
                     // loop through each course linking course id and profile picture: 
-                    $coursesAndProfilepicturesList = array(); 
-                    $courses = $stmt->fetchAll(PDO::FETCH_ASSOC); 
-                    for($i = 0; $i < $num; $i++ ) {
+                    $coursesAndProfilepictures = array(); 
+                    while ($row_course = $stmt->fetch(PDO::FETCH_ASSOC))
+                    {
+
+                        extract($row_course); 
 
                         $image_query = "SELECT * FROM lecturer WHERE course_course_id = :course_id";
 
                         $image_stmt = $conn->connect()->prepare($image_query); 
 
-                        $image_stmt->bindParam(":course_id", $courses[$i]['course_id']); 
+                        $image_stmt->bindParam(":course_id", $course_id); 
 
                         $image_stmt->execute(); 
 
-                        echo "{$courses[$i]['course_id']} <br>"; 
 
-                        if($image_stmt->rowCount() > 0) {
+                        if($image_stmt->rowCount() > 0) 
+                        {
                             // if there is lecturer assigned to the course:
-
-                            while($row_lecturer = $image_stmt->fetch(PDO::FETCH_ASSOC)) {
+                            while($row_lecturer = $image_stmt->fetch(PDO::FETCH_ASSOC)) 
+                            {
                                 extract($row_lecturer);
 
-                                echo "{$profilepicture} <br>" ; 
+                                $option = '<option value="'. $course_id . '" data-img_src="../uploads/' . $profilepicture . '">' . $course_name . ' </option>'; 
+                                array_push($coursesAndProfilepictures, $option); 
 
-                                $coursesAndProfilepictures = array(
-                                    "{$courses[$i]['course_id']}" => $profilepicture,
-                                );
 
-                                echo "{$coursesAndProfilepictures[$courses[$i]['course_id']]} <br>"; 
-
-                                array_push($coursesAndProfilepicturesList, $coursesAndProfilepictures); 
                             }
-                        } else {
+                        } else 
+                        {
                             // if there is no lecturer assigned to the course: 
-                            $coursesAndProfilepictures = array(
-                                "{$courses[$i]['course_id']}" => null,
-                            );
-
-                            echo "{$coursesAndProfilepictures[$courses[$i]['course_id']]} <br>"; 
-
-                            array_push($coursesAndProfilepicturesList, $coursesAndProfilepictures); 
-
+                            $NoProfilePictureDefault = "default.png";   
+                            array_push($coursesAndProfilepictures, '<option value="'. $course_id . '" data-img_src="../uploads/' . $NoProfilePictureDefault . '">' . $course_name . ' </option>');
+                            
                         }
 
                     }
-
-                    // while($row_course = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    //     extract($row_course); 
-
-                    //     $image_query = "SELECT * FROM lecturer WHERE course_course_id = :course_id";
-
-                    //     $image_stmt = $conn->connect()->prepare($image_query); 
-
-                    //     $image_stmt->bindParam(":course_id", $course_id); 
-
-                    //     $image_stmt->execute(); 
-
-                    //     $num = $image_stmt->rowCount(); 
-
-                    //     echo "{$course_id} <br>" ; 
-
-                    //     if($num > 0) {
-
-                    //         while($row_lecturer = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    //             extract($row_lecturer);
-                    //             echo $lecturer_id; 
-
-                    //         }
-                    //     }   
-                    // }
                 }   
 
-                // $image_query = "select * from lecturer where course_course_id = '{$course_id}'";
-                // if ($image_res = $mysqli->query($image_query)){
-                // while (($image_row = $image_res->fetch_assoc())){
-                //     extract($image_row);
-                //     echo "<img src='uploads/" .$profilepicture. "' width='500px'>";
-                // }
-                // $image_res->free();
-                        // ITF15019
                 ?>
-
 
             <div id="message">
                 <form action="includes/message.inc.php" method="post">
-                <label for="courses">Choose the course you want to send a message:</label>
+                <label for="courses">Choose the course you want to send a message to:</label>
 
                         <br>
                         <textarea id="message-txt" name="message_text" rows="10" cols="50">     
@@ -139,19 +97,13 @@
                         <label for="courses">Choose the course you want to send a message:</label>
                         <select  name="course_id" id="id_select2_example" style="width: 200px;">
                         <?php
-                            $num = count($coursesAndProfilepicturesList); 
-
+                            $num = count($coursesAndProfilepictures); 
+                
                             for($i = 0; $i < $num; $i++) {
 
-                                echo '<option value="{}" data-img_src= "../uploads/{}" >{}</option>'; 
-
+                                echo $coursesAndProfilepictures[$i]; 
+                               
                             }
-
-
-                            <option value="ITM30617" data-img_src= "../uploads/61ff473c5520f0.42183828.png" >dsadada</option>
-                            <option value="ITF15019" data-img_src="../uploads/61ff473c5520f0.42183828.png">Innføring i datasikkerhet</option>
-                            <option value="BVN13092" data-img_src="">Utvikling av interaktive bavianer</option>
-                            <option value="OKS12032">Innføring i okse</option>
                             ?>
                         </select>
                         <br>
