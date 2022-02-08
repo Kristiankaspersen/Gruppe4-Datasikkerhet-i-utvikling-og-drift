@@ -252,7 +252,3 @@ INSERT INTO course (course_id, course_name, pin_code) VALUES ("ITF15019","Innfø
 INSERT INTO course (course_id, course_name, pin_code) VALUES ("BVN13092","Utvikling av interaktive bavianer", 3214); 
 INSERT INTO course (course_id, course_name, pin_code) VALUES ("OKS12032","Innføring i okse", 5678); 
 
--- Testing user: 
-INSERT INTO user (username, first_name, last_name, email, password, user_role ) VALUES ('bob', 'geir', 'oksesen', 'geiroksesen@gmail.com', 123 , 'lecturer');
-INSERT INTO lecturer (lecturer_id, profilepicture, course_course_id) VALUES (1 ,'picture/picture', 'ITM30617');
-INSERT INTO lecturer_has_user (lecturer_lecturer_id, user_username) VALUES (1, 'bob'); 
