@@ -16,7 +16,7 @@ class ReplyController  {
         }
         
         if($this->reply->create()) {
-            header("location: ../student-message.php?error=YourPostHasBeenSubmitted"); 
+            header("location: ../reply-message.php?error=YourPostHasBeenSubmitted"); 
             echo "Your reply has been submitted"; 
         } else {
             header("location: ../index.php?error=TheMessageDidNotGetCraeted"); 

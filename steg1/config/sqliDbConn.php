@@ -1,5 +1,6 @@
 <?php
-$dBServername = "localhost:3307";
+//$dBServername = "localhost:3307";
+$dBServername = "localhost:8889";
 $dBUsername = "root";
 $dBPassword = "root";
 $dBName ="GruppeFireDB";

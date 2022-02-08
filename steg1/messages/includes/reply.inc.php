@@ -19,10 +19,6 @@ if(isset($_POST["submit"])) {
 
     $replyController = new ReplyController($reply); 
    
-    if($replyController->createReply()) {
-        echo "Your reply has been submitted"; 
-    } else {
-        echo "Error in posting reply"; 
-    }
+    $replyController->createReply();    
 
 }

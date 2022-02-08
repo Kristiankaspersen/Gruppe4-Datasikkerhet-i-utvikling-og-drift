@@ -21,9 +21,8 @@
         <nav>
             <ul>
                 <li><a href="#"><?php echo $_SESSION["username"]; ?></a></li>
-                <li><a href="#"><?php echo $_SESSION["lecturer_id"]; ?></a></li>
-                <li><a href="classes/Change_Password.php">Change Password</a></li>
-                <li><a href="../messages/reply-message.php">Answer messages</a></li>
+                <li><a href="../../steg1/auth/Change_Password.php">Change Password</a></li>
+                <li><a href="reply-message.php">Answer messages</a></li>
                 <li><a href="../auth/includes/logout.inc.php">Logout</a></li>
             </ul>
         </nav> 
