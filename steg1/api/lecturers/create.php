@@ -4,12 +4,11 @@
 // Add content-type: application/json in headears. 
 // {
 //     "username": "testUser3",
-//     "firstName": "testfirstname",
-//     "lastName": "testlastname",
+//     "first_name": "testfirstname",
+//     "last_name": "testlastname",
 //     "email": "testLecturer4@email.com",
 //     "password": "test", 
-//     "passwordRepeat": "test",
-//     "profilePictureAdress": "testpic.png",
+//     "profilepicture": "testpic.png",
 //     "courseID": "ITM30617"
 // }
 
@@ -33,19 +32,18 @@ $data = json_decode(file_get_contents("php://input"));
 $lecturer = new Lecturer(
     $db,  
     $data->username,
-    $data->firstName, 
-    $data->lastName, 
+    $data->first_name, 
+    $data->last_name, 
     $data->email, 
     $data->password,
-    $data->passwordRepeat,
-    $data->profilePictureAdress,
+    $data->profilepicture,
     $data->courseID              
 ); 
 
 // create post
 if($lecturer->create()) {
-    echo json_encode( array('message' => 'Post Created')); 
+    echo json_encode( array('message' => 'Lecturer Created')); 
 } else {
 
-    echo json_encode( array('message' => 'Post Not Created'));
+    echo json_encode( array('message' => 'Lecturer not Created'));
 }

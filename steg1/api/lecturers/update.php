@@ -4,13 +4,13 @@
 // Add content-type: application/json in headears. 
 // {
 //     "username": "testUser3",
-//     "firstName": "testfirstname",
-//     "lastName": "testlastname",
+//     "first_name": "testfirstname",
+//     "last_name": "testlastname",
 //     "email": "testLecturer4@email.com",
 //     "password": "test", 
-//     "passwordRepeat": "test",
-//     "profilePictureAdress": "/profilepicture/testpic.png",
-//     "courseID": "ITM30617"
+//     "lecturer_id": "1",
+//     "profilepicture": "testpic.png",
+//     "course_id": "ITM30617"
 // }
 
 header('Access-Control-Allow-Origin: *'); 
@@ -33,13 +33,13 @@ $data = json_decode(file_get_contents("php://input"));
 $lecturer = new Lecturer(
     $db,  
     $data->username,
-    $data->firstName, 
-    $data->lastName, 
+    $data->first_name, 
+    $data->last_name, 
     $data->email, 
     $data->password,
-    $data->passwordRepeat,
-    $data->profilePictureAdress,
-    $data->courseID              
+    $data->lecturer_id, 
+    $data->profilepicture,
+    $data->course_id              
 ); 
 
 // create post

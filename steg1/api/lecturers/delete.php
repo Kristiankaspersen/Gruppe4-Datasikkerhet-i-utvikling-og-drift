@@ -25,7 +25,7 @@ $data = json_decode(file_get_contents("php://input"));
 $lecturer = new Lecturer(
     $db,
     $data->username,
-    $data->lecturerID
+    $data->lecturer_id
 ); 
 
 // delete lecturer

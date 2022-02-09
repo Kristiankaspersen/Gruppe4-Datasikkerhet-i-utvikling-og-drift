@@ -18,6 +18,9 @@ class User {
             case 1: 
                 $this->construct1($args[0]);
             break; 
+            case 5: 
+                $this->construct5($args[0], $args[1], $args[2], $args[3], $args[4]); 
+            break; 
             case 6: 
                 $this->construct6($args[0], $args[1], $args[2], $args[3], $args[4], $args[5]); 
             break; 
@@ -31,6 +34,16 @@ class User {
 
     private function construct1($username) {
         $this->username = $username; 
+    }
+
+    private function construct5($username, $firstName, $lastName,  $email, $password) { 
+
+        $this->username = $username;
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
+        $this->email = $email;
+        $this->password = $password;
+ 
     }
 
     private function construct6($username, $firstName, $lastName,  $email, $password, $passwordRepeat) { 

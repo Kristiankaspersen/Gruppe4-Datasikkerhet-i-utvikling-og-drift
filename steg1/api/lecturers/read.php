@@ -35,7 +35,7 @@ if ($num > 0) {
             'user_role' => $user_role,
             'lecturer_id' => $lecturer_id,
             'profilepicture' => $profilepicture,
-            'course_course_id' => $course_course_id
+            'course_id' => $course_course_id
         );
         // push to "data"  
         array_push($lecturer_arr['data'], $lecturer_item); 
