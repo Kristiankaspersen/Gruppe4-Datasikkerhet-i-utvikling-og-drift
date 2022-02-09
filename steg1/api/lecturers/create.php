@@ -9,7 +9,7 @@
 //     "email": "testLecturer4@email.com",
 //     "password": "test", 
 //     "passwordRepeat": "test",
-//     "profilePictureAdress": "/profilepicture/testpic.png",
+//     "profilePictureAdress": "testpic.png",
 //     "courseID": "ITM30617"
 // }
 

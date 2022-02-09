@@ -52,7 +52,7 @@ class Course {
         $query = "SELECT * FROM course"; 
 
         // prepare
-        $stmt = $this->conn->prepare($query); 
+        $stmt = $this->conn->connect()->prepare($query); 
 
         $stmt->execute(); 
 
@@ -63,7 +63,7 @@ class Course {
         $query = "INSERT INTO course(course_id, course_name, pin_code) 
                   VALUES (?, ?, ?)  ";
         
-        $stmt = $this->conn->prepare($query);
+        $stmt = $this->conn->connect()->prepare($query);
 
         // Clean data: 
         $this->courseID = htmlspecialchars(strip_tags($this->courseID)); 
@@ -88,7 +88,7 @@ class Course {
                       pin_code = :pin_code  
                   WHERE course_id = :course_id;";
         
-        $stmt = $this->conn->prepare($query);
+        $stmt = $this->conn->connect()->prepare($query);
 
         // Clean data: 
         $this->courseID = htmlspecialchars(strip_tags($this->courseID)); 
@@ -116,7 +116,7 @@ class Course {
         $query = "DELETE FROM course WHERE course_id = :course_id"; 
 
         // Prepare statement 
-        $stmt = $this->conn->prepare($query); 
+        $stmt = $this->conn->connect()->prepare($query); 
 
         // Clean data
         $this->courseID = htmlspecialchars(strip_tags($this->courseID)); 

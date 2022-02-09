@@ -6,8 +6,7 @@ header('Content-type: application/json');
 include '../../config/DatabaseConnection.php';
 include '../../models/Course.php'; 
 
-$database = new DatabaseConnection(); 
-$db = $database->connect();
+$db = new DatabaseConnection(); 
 
 $course = new Course($db); 
 

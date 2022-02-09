@@ -18,8 +18,8 @@ include '../../config/DatabaseConnection.php';
 include '../../models/Reply.php'; 
 
 // instantiate DB and connect. 
-$database = new DatabaseConnection(); 
-$db = $database->connect(); 
+$db = new DatabaseConnection(); 
+
 
 // Get raw posted data
 $data = json_decode(file_get_contents("php://input")); 

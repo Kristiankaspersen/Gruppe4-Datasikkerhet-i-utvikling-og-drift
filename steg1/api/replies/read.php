@@ -6,8 +6,8 @@ header('Content-type: application/json');
 include '../../config/DatabaseConnection.php';
 include '../../models/Reply.php'; 
 
-$database = new DatabaseConnection(); 
-$db = $database->connect();
+$db = new DatabaseConnection(); 
+
 
 $reply = new Reply($db); 
 

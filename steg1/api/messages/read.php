@@ -6,8 +6,8 @@ header('Content-type: application/json');
 include '../../config/DatabaseConnection.php';
 include '../../models/Message.php'; 
 
-$database = new DatabaseConnection(); 
-$db = $database->connect();
+$db = new DatabaseConnection(); 
+
 
 $message = new Message($db); 
 

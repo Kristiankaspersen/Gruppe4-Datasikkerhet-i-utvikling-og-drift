@@ -58,7 +58,7 @@ class Message {
         $query = "SELECT * FROM message"; 
 
         // prepare
-        $stmt = $this->conn->prepare($query); 
+        $stmt = $this->conn->connect()->prepare($query); 
 
         $stmt->execute(); 
 

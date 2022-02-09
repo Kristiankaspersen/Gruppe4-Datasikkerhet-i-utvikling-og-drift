@@ -6,8 +6,8 @@ header('Content-type: application/json');
 include '../../config/DatabaseConnection.php';
 include '../../models/Comment.php'; 
 
-$database = new DatabaseConnection(); 
-$db = $database->connect();
+$db = new DatabaseConnection(); 
+
 
 $comment = new Comment($db); 
 

@@ -115,7 +115,7 @@ else if ($has_pin_access == TRUE){
     }
 
     ?>
-                            <div class="reply-box">
+                    <div class="reply-box">
                         <form action="messages/includes/comment.inc.php" method="post">
                             <label for="courses">Send comment to message id:</label>
                             <select id="course" name="comment_id">

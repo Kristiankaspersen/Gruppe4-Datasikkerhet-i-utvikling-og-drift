@@ -43,9 +43,9 @@ $lecturer = new Lecturer(
 ); 
 
 // create post
-if($lecturer->create()) {
-    echo json_encode( array('message' => 'Post Created')); 
+if($lecturer->update()) {
+    echo json_encode( array('message' => 'Lecturer updated')); 
 } else {
 
-    echo json_encode( array('message' => 'Post Not Created'));
+    echo json_encode( array('message' => 'Lecturer updated'));
 }
