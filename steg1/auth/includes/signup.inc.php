@@ -55,7 +55,7 @@ if(isset($_POST["submitLecturer"])) {
             if($fileSize < 500000) {
                 $fileNameNew = uniqid('', true).".".$fileActualExt;
                 $fileDestination = '../../uploads/'.$fileNameNew;
-                move_uploaded_file($fileTmpName, $fileDestination);
+                copy($fileTmpName, $fileDestination);
             } else {
                 echo "You file is to big!"; 
                 exit(); 

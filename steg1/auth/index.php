@@ -20,7 +20,7 @@
             ?>
                 <li><a href="#"><?php echo $_SESSION["username"]; ?></a></li>
                 <li><a href="../messages/student-message.php">Send message</a></li>
-                <li><a href="Change_Password.php">Change Password</a></li>
+                <li><a href="change-password-KK.php">Change Password</a></li>
                 <li><a href="includes/logout.inc.php">Logout</a></li>
 
             <?php
@@ -30,7 +30,7 @@
             ?>
                 <li><a href="#"><?php echo $_SESSION["username"]; ?></a></li>
                 <li><a href="../messages/reply-message.php">Send message</a></li>
-                <li><a href="Change_Password.php">Change Password</a></li>
+                <li><a href="change-password-KK.php">Change Password</a></li>
                 <li><a href="includes/logout.inc.php">Logout</a></li>
                 
             <?php

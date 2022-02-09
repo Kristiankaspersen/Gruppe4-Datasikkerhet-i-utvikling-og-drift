@@ -57,7 +57,7 @@ class Comment {
     public function read() { 
         $query = "SELECT * FROM comment"; 
 
-        $stmt = $this->conn->prepare($query); 
+        $stmt = $this->conn->connect()->prepare($query); 
 
         $stmt->execute(); 
 
@@ -91,7 +91,7 @@ class Comment {
                   SET comment_text = :comment_text 
                   WHERE comment_id = :comment_id; ";
         
-        $stmt = $this->conn->prepare($query);
+        $stmt = $this->conn->connect()->prepare($query);
 
         // Clean data: 
 
@@ -118,7 +118,7 @@ class Comment {
         $query = "DELETE FROM comment WHERE comment_id = :id"; 
 
         // Prepare statement 
-        $stmt = $this->conn->prepare($query); 
+        $stmt = $this->conn->connect()->prepare($query); 
 
         // Clean data
         $this->commentID = htmlspecialchars(strip_tags($this->commentID)); 

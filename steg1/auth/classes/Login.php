@@ -64,6 +64,7 @@ class Login extends DatabaseConnection {
                 $_SESSION["course_id"] = $lecturer[0]["course_course_id"]; 
                 $_SESSION["profilepicture"] = $lecturer[0]["profilepicture"];
 
+            
 
             } elseif ($user[0]["user_role"] === "student") {
 
