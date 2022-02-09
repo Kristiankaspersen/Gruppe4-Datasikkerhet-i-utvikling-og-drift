@@ -36,6 +36,7 @@ $lecturer = new Lecturer(
     $data->last_name, 
     $data->email, 
     $data->password,
+    $passwordRepeat = "not needed",
     $data->profilepicture,
     $data->courseID              
 ); 

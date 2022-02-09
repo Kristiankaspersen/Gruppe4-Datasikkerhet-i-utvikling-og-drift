@@ -20,10 +20,10 @@ class Lecturer extends User {
                 $this->construct3($args[0], $args[1], $args[2]);
             break;
             case 8: 
-                $this->construct7($args[0], $args[1], $args[2], $args[3], $args[4], $args[5], $args[6]); 
+                $this->construct7($args[0], $args[1], $args[2], $args[3], $args[4], $args[5], $args[6], $args[7]); 
             break; 
             case 9: 
-                $this->construct8($args[0], $args[1], $args[2], $args[3], $args[4], $args[5], $args[6], $args[7]);
+                $this->construct8($args[0], $args[1], $args[2], $args[3], $args[4], $args[5], $args[6], $args[7], $args[8]);
             break;
             case 10: 
                 $this->construct9($args[0], $args[1], $args[2], $args[3], $args[4], $args[5], $args[6], $args[7], $args[8], $args[9]);
@@ -45,9 +45,9 @@ class Lecturer extends User {
         $this->lecturerID = $lecturerID;  
     }
         
-    private function construct7($username, $firstName, $lastName,  $email, $password, $profilePictureAdress, $courseID)
+    private function construct7($username, $firstName, $lastName,  $email, $password, $passwordRepeat, $profilePictureAdress, $courseID)
     {
-        parent::__construct($username, $firstName, $lastName,  $email, $password);
+        parent::__construct($username, $firstName, $lastName,  $email, $password, $passwordRepeat);
         
         $this->profilePictureAdress = $profilePictureAdress; 
         $this->courseID = $courseID; 
@@ -55,9 +55,9 @@ class Lecturer extends User {
         
     }
 
-    private function construct8($db, $username, $firstName, $lastName,  $email, $password, $profilePictureAdress, $courseID)
+    private function construct8($db, $username, $firstName, $lastName,  $email, $password, $passwordRepeat, $profilePictureAdress, $courseID)
     {
-        parent::__construct($username, $firstName, $lastName,  $email, $password);
+        parent::__construct($username, $firstName, $lastName,  $email, $password, $passwordRepeat);
         
         $this->profilePictureAdress = $profilePictureAdress; 
         $this->courseID = $courseID; 
@@ -67,9 +67,9 @@ class Lecturer extends User {
         
     }
 
-    private function construct9($db, $username, $firstName, $lastName,  $email, $password, $profilePictureAdress, $courseID, $lecturerID)
+    private function construct9($db, $username, $firstName, $lastName,  $email, $password, $passwordRepeat, $profilePictureAdress, $courseID, $lecturerID)
     {
-        parent::__construct($username, $firstName, $lastName,  $email, $password);
+        parent::__construct($username, $firstName, $lastName,  $email, $password, $passwordRepeat);
         
         $this->profilePictureAdress = $profilePictureAdress; 
         $this->courseID = $courseID;
