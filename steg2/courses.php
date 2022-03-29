@@ -20,7 +20,7 @@
 <?php
 
 include "config/mysqliConn.php"; 
-$query = "SELECT course_id, course_name FROM course";
+// $query = "SELECT course_id, course_name FROM course";
 
 echo "
 <table>
@@ -30,7 +30,10 @@ echo "
 </tr>
 ";
 
-if ($result = $mysqli->query($query)){
+$stmt = $mysqli->prepare("SELECT course_id, course_name FROM course");
+$stmt->execute();
+
+if ($result = $stmt->get_result()){
     while(($row = $result->fetch_assoc())){
         $courseId = $row["course_id"];
         $courseName = $row["course_name"];
