@@ -16,7 +16,7 @@ if (isset($_POST["reset-password-submit"])) {
 
     $currentDate = date("U");
 
-    require '../../config\sqliDbConn.php';
+    require '../../config/sqliDbConn.php';
 
 
     $sql = "SELECT * FROM pwdReset WHERE pwdResetSelector=? AND pwdResetExpires >= ?";
