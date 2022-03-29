@@ -24,6 +24,12 @@ if (isset($_GET['course'])){
 }
 
 if (isset($_POST["pin_code"])){
+
+    // $stmt = $mysqli->prepare("select course_id, course_name from course where pin_code = ?");
+    // $stmt->bind_param("i", $pin_code);
+    // $stmt->execute(); 
+    // $result = $stmt->get_result();
+    
     $query = "select course_id, course_name from course where pin_code = '{$_POST['pin_code']}'";
     if ($result = $mysqli->query($query)){
         while(($row = $result->fetch_assoc())){
