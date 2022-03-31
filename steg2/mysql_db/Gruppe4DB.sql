@@ -301,3 +301,9 @@ SELECT * FROM comment;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- Inserting courses
+INSERT INTO course (course_id, course_name, pin_code) VALUES ("ITM30617","Utvikling av interaktive nettsteder", 1234); 
+INSERT INTO course (course_id, course_name, pin_code) VALUES ("ITF15019","Innføring i datasikkerhet", 4321); 
+INSERT INTO course (course_id, course_name, pin_code) VALUES ("BVN13092","Utvikling av interaktive bavianer", 3214); 
+INSERT INTO course (course_id, course_name, pin_code) VALUES ("OKS12032","Innføring i okse", 5678); 
