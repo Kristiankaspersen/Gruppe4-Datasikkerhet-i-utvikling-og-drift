@@ -55,7 +55,7 @@ class Message {
     } 
     
     public function read() { 
-        $query = "SELECT * FROM message"; 
+        $query = "SELECT * FROM VWmessage"; 
 
         // prepare
         $stmt = $this->conn->connect()->prepare($query); 
@@ -66,7 +66,7 @@ class Message {
     }
 
     public function create() {
-        $query = "INSERT INTO message(course_course_id, student_student_id, message_text) 
+        $query = "INSERT INTO VWmessage(course_course_id, student_student_id, message_text) 
                   VALUES (?,?,?)  ";
         
         $stmt = $this->conn->connect()->prepare($query);
