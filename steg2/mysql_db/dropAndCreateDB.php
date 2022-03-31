@@ -10,7 +10,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "DROP SCHEMA GruppeFireDB;";
+$sql = "DROP SCHEMA Gruppe4DB;";
 if (mysqli_query($conn, $sql)) { 
     echo "Old DB dropped \n"; 
 } else { 
@@ -18,7 +18,7 @@ if (mysqli_query($conn, $sql)) {
 }
 
 
-$sql = "CREATE SCHEMA IF NOT EXISTS `GruppeFireDB` DEFAULT CHARACTER SET utf8mb4;";
+$sql = "CREATE SCHEMA IF NOT EXISTS `Gruppe4DB` DEFAULT CHARACTER SET utf8mb4;";
 if (mysqli_query($conn, $sql)) {
     echo "Database created successfully with the name GruppeFireDB \n";
 } else {
@@ -29,11 +29,11 @@ if (mysqli_query($conn, $sql)) {
 mysqli_close($conn);
 
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=GruppeFireDB", $username, $password);
+    $conn = new PDO("mysql:host=$servername;dbname=Gruppe4DB", $username, $password);
     // setting the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
    
-    $query = file_get_contents("GruppeFireDB.sql");
+    $query = file_get_contents("Gruppe4DB.sql");
     $conn->exec($query);
     echo "Tables and all deafault data successfully inserted in the DB \n";
     }
