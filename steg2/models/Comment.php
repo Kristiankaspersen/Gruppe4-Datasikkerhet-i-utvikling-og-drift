@@ -55,7 +55,7 @@ class Comment {
     }
 
     public function read() { 
-        $query = "SELECT * FROM comment"; 
+        $query = "SELECT * FROM VWcomment"; 
 
         $stmt = $this->conn->connect()->prepare($query); 
 
@@ -65,7 +65,7 @@ class Comment {
     }
 
     public function create() {
-        $query = "INSERT INTO comment(message_message_id, comment_text) 
+        $query = "INSERT INTO VWcomment(message_message_id, comment_text) 
                   VALUES (?,?)  ";
         
         $stmt = $this->conn->connect()->prepare($query);

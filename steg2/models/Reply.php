@@ -39,7 +39,7 @@ class Reply {
     } 
 
     public function read() { 
-        $query = "SELECT * FROM reply"; 
+        $query = "SELECT * FROM VWreply"; 
 
         $stmt = $this->conn->connect()->prepare($query); 
 
@@ -50,7 +50,7 @@ class Reply {
     }
 
     public function create() {
-        $query = "INSERT INTO reply(message_message_id, lecturer_lecturer_id, reply_text) 
+        $query = "INSERT INTO VWreply(message_message_id, lecturer_lecturer_id, reply_text) 
                 VALUES (?, ?, ?)  ";
         
         $stmt = $this->conn->connect()->prepare($query);
