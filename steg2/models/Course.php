@@ -49,7 +49,7 @@ class Course {
     } 
     
     public function read() { 
-        $query = "SELECT * FROM course"; 
+        $query = "SELECT * FROM VWcourse"; 
 
         // prepare
         $stmt = $this->conn->connect()->prepare($query); 
@@ -60,7 +60,7 @@ class Course {
     }
 
     public function create() {
-        $query = "INSERT INTO course(course_id, course_name, pin_code) 
+        $query = "INSERT INTO VWcourse(course_id, course_name, pin_code) 
                   VALUES (?, ?, ?)  ";
         
         $stmt = $this->conn->connect()->prepare($query);
