@@ -3,7 +3,7 @@
 $dBServername = "localhost:8889";
 $dBUsername = "root";
 $dBPassword = "root";
-$dBName ="GruppeFireDB";
+$dBName ="Gruppe4DB";
 
 
 $conn = mysqli_connect($dBServername, $dBUsername, $dBPassword, $dBName);

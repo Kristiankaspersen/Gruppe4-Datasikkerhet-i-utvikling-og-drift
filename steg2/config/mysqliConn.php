@@ -4,7 +4,7 @@
 $servername = "localhost:8889";
 $username = "root";
 $password = "root";
-$dbName = "GruppeFireDB";
+$dbName = "Gruppe4DB";
 
 $mysqli = new mysqli($servername, $username, $password, $dbName);
 ?>

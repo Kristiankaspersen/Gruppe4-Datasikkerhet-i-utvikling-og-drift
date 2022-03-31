@@ -11,7 +11,7 @@ class DatabaseConnection {
             $servername = "localhost:8889"; 
             $username = "root"; 
             $password = "root";  
-            $databaseConnection = new PDO("mysql:host=$servername;dbname=GruppeFireDB", $username, $password);
+            $databaseConnection = new PDO("mysql:host=$servername;dbname=Gruppe4DB", $username, $password);
             return $databaseConnection; 
 
         }

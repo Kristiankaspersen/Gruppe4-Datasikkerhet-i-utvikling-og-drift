@@ -21,7 +21,7 @@
         <nav>
             <ul>
                 <li><a href="#"><?php echo $_SESSION["username"]; ?></a></li>
-                <li><a href="../../steg1/auth/Change_Password.php">Change Password</a></li>
+                <li><a href="../../steg2/auth/Change_Password.php">Change Password</a></li>
                 <li><a href="reply-message.php">Answer messages</a></li>
                 <li><a href="../auth/includes/logout.inc.php">Logout</a></li>
             </ul>

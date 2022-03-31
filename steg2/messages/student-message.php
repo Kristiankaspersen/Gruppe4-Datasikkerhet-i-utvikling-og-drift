@@ -24,8 +24,8 @@
                     <li><a href="#"><?php echo $_SESSION["username"]; ?></a></li>
                     <li><a href="../index.php">Home</a></li>
                     <li><a href="../messages/student-message.php">Send message</a></li>
-                    <li><a href="../../steg1/auth/Change_Password.php">Change Password</a></li>
-                    <li><a href="../../steg1/auth/includes/logout.inc.php">Logout</a></li>
+                    <li><a href="../../steg2/auth/Change_Password.php">Change Password</a></li>
+                    <li><a href="../../steg2/auth/includes/logout.inc.php">Logout</a></li>
             </ul>
         </nav> 
                 <?php
