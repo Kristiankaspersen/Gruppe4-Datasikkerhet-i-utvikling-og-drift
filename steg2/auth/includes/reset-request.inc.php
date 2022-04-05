@@ -4,7 +4,7 @@ if (isset($_POST["reset-request-submit"])){
     $selector = bin2hex(random_bytes(8)); 
     $token = random_bytes(32);
 
-    $url = "Location: ../create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
+    $url = "http://158.39.188.204/repo/Gruppe4-Datasikkerhet-i-utvikling-og-drift/steg2/auth/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
     $expires = date("U") + 1800;
 
