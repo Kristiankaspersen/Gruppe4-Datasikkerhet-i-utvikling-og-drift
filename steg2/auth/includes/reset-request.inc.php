@@ -10,7 +10,7 @@ if (isset($_POST["reset-request-submit"])){
 
     
 
-    require '../../config\sqliDbConn.php';
+    require '../../config/sqliDbConn.php';
 
     $email = $_POST["email"];
 
@@ -40,7 +40,7 @@ if (isset($_POST["reset-request-submit"])){
     mysqli_stmt_close($stmt);
 
 
-    $to = "katrinehoyem@hotmail.com";
+    $to = $email;
     $subject = 'Reset your password';
 
     $message = '<p>Follow this link to reset your password, if you do not need to reset your password then ignore this email. </br> Here is your password link</p>';
