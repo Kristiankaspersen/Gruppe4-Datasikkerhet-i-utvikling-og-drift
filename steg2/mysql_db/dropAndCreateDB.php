@@ -1,7 +1,7 @@
 <?php
-$servername = "localhost:8889";
-$username = "root";
-$password = "root";
+$servername = "localhost";
+$username = "fire_db_bruker";
+$password = "NF@Ykpk7M8b3";
 
 // Creating connection
 $conn = mysqli_connect($servername, $username, $password);

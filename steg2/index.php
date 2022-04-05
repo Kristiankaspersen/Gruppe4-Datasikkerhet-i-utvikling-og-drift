@@ -1,3 +1,10 @@
+<?php 
+
+include "testLogging.php"
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
