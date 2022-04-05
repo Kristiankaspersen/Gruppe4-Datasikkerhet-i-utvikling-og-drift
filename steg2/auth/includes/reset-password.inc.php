@@ -36,6 +36,7 @@ if (isset($_POST["reset-password-submit"])) {
         
         $tokenBin = hex2bin($validator)
         $tokenCheck _= password_verify($tokenBin, $row["pwdResetToken"]);
+        }
 
         if ($tokenCheck === false) {
 
@@ -84,15 +85,9 @@ if (isset($_POST["reset-password-submit"])) {
             }
         }
     }
-}
-
-
-
 } else {
     header("Location: ../index.php")
 }
-
-
-
+}
 ?>
 
