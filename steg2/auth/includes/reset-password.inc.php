@@ -75,7 +75,7 @@ if (isset($_POST["reset-password-submit"])) {
                     }else {
                     mysqli_stmt_bind_param($stmt, "s", $userEmail);
                     mysqli_stmt_execute($stmt);
-                    header("Location: ../steg1\auth\forgotpassword.php");
+                    header("Location: ../forgotpassword.php");
                 }
 
                 }
