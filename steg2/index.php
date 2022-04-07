@@ -1,6 +1,8 @@
 <?php 
 
-include "testLogging.php"
+include __dir__ . "/config/testLogging.php"; 
+
+$logger->info('Yeah'); 
 
 ?>
 

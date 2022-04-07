@@ -1,5 +1,8 @@
 <?php 
  session_start();
+
+include __dir__ . "/config/testLogging.php"
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -171,7 +174,9 @@ else if ($has_pin_access == TRUE){
     <?php 
 }
 else {
+    $logger->info("{$_COOKIE["Honolulu"]} prøvde å gå inn på kursside h*n ikke har tilgang til");
     echo "<h1>Du har ikke tilgang til dette emnet, <a href='courses.php'>Gå tilbake</a></h1>";
+
 }
 
 ?>

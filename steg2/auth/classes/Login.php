@@ -1,5 +1,7 @@
 <?php
 
+include( "../../testLogging.php");
+
 class Login extends DatabaseConnection { 
 
     protected function getUser($usernameOrEmail, $password) { 
@@ -17,6 +19,7 @@ class Login extends DatabaseConnection {
 
         if($checkPassword == false) { 
 
+            $logger->info("wrong login info");
             $statement = null; 
             header("location: ../index.php?error=wrongpassword"); 
             exit(); 
