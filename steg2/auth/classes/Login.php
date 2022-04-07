@@ -1,7 +1,5 @@
 <?php
 
-include( "../../testLogging.php");
-
 class Login extends DatabaseConnection { 
 
     protected function getUser($usernameOrEmail, $password) { 
@@ -18,8 +16,9 @@ class Login extends DatabaseConnection {
         $checkPassword = password_verify($password, $passwordHashed[0]["password"]); 
 
         if($checkPassword == false) { 
-
+            include( dirname(__dir__, 2) . "/config/testLogging.php");
             $logger->info("wrong login info");
+
             $statement = null; 
             header("location: ../index.php?error=wrongpassword"); 
             exit(); 
@@ -81,9 +80,7 @@ class Login extends DatabaseConnection {
                 $_SESSION["student_id"] = $student_has_user[0]["student_student_id"]; 
 
             } else {
-                echo "your user is either lecturer or student, 
-                so you don't get any session information, 
-                maybe you are admin, but we don't give a shit about you"; 
+                echo "hei"; 
             }
 
 
