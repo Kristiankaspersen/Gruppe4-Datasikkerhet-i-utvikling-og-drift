@@ -17,7 +17,7 @@ class Login extends DatabaseConnection {
 
         if($checkPassword == false) { 
             include( dirname(__dir__, 2) . "/config/testLogging.php");
-            $logger->info("wrong login info");
+            $logger->info("{$_SERVER['REMOTE_ADDR']} wrong login info");
 
             $statement = null; 
             header("location: ../index.php?error=wrongpassword"); 

@@ -14,7 +14,7 @@ include __dir__ . "/config/testLogging.php"
     <title>Steg1-Gruppe4</title>
 </head>
 <body>
-<h2><a href="../steg1/index.php">Gå tilbake</a></h2>
+<h2><a href="../steg2/index.php">Gå tilbake</a></h2>
 <?php
 include "config/mysqliConn.php";
 
@@ -174,7 +174,7 @@ else if ($has_pin_access == TRUE){
     <?php 
 }
 else {
-    $logger->info("{$_COOKIE["Honolulu"]} prøvde å gå inn på kursside h*n ikke har tilgang til");
+    $logger->info("{$_SERVER['REMOTE_ADDR']} tried to access course without access");
     echo "<h1>Du har ikke tilgang til dette emnet, <a href='courses.php'>Gå tilbake</a></h1>";
 
 }
